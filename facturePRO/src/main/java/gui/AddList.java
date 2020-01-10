@@ -46,7 +46,7 @@ public class AddList extends JDialog {
     /**
      * Konsturktor.
      */
-    public CatalogButton(Catalog catalog) {
+    public CatalogButton(final Catalog catalog) {
       super();
       this.catalog = catalog;
       setText(catalog.getNameSurname());
