@@ -5,9 +5,12 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JFrame;
 
+import newgui.dialogs.LoginDialog;
 import newgui.panels.AreaPanel;
 import newgui.panels.ButtonsPanel;
 import newgui.panels.ListPanel;
+
+import static newgui.constants.ButtonsPanelConstants.*;
 
 public class Gui extends JFrame {
 
@@ -16,18 +19,26 @@ public class Gui extends JFrame {
 	ListPanel listPanel;
 	AreaPanel areaPanel;
 	
+	//dialogs
+	LoginDialog loginDialog;
+	
 	public Gui() {
 
+		//panels
 		buttonsPanel = new ButtonsPanel() {
 			@Override
 			public void buttonPressed(String button) {
-				
+				actionButtonPressed(button);
 			}
 		};
 		
 		listPanel = new ListPanel();
 		
 		areaPanel = new AreaPanel();
+		
+		
+		//dialogs
+		loginDialog = new LoginDialog();
 		
 	    // gridBagLayout
 	    GridBagLayout layout = new GridBagLayout();
@@ -55,6 +66,19 @@ public class Gui extends JFrame {
 	    setDefaultCloseOperation(EXIT_ON_CLOSE);
 	    setTitle("IvoDB");
 	    setVisible(true);
+	}
+	
+	/** Invoked when action button is pressed. */
+	public void actionButtonPressed(String action) {
+		switch(action) {
+		case LOG_IN:
+			initLoginDialog();
+		}
+	}
+	
+	/** Invokes login dialog. */
+	public void initLoginDialog() {
+		loginDialog.init();
 	}
 
 	public static void main(String[] args) {
