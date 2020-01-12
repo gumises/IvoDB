@@ -1,4 +1,4 @@
-package newgui.panels.products;
+package newgui.panels.productssearcher;
 
 import javax.swing.JPanel;
 import newgui.components.ActionButton;
@@ -8,6 +8,7 @@ import static newgui.components.FormatterFactory.getFormat;
 import static newgui.constants.ListPanelConstants.*;
 import static newgui.constants.DataFormats.*;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -77,7 +78,6 @@ public class ProductsSearcher extends JPanel {
 	    add(search, gbc);
 	    
 	    //setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-	    setPreferredSize(SEARCHER_DIMENSION);
 	    setBackground(PANEL_COLOR);
 	    //pack();
 	    setVisible(true);

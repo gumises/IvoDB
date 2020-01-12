@@ -9,7 +9,7 @@ public class ButtonsPanelConstants {
 	public final static String SEARCH_PRODUCTS = "Wyszukaj produkt";
 	public final static String ADD_PRODUCT = "Dodaj produkt";
 	public final static String REMOVE_PRODUCT = "Usun produkt";
-	public final static String CHANGE_AMOUNT = "Zmien ilosc produktu";
+	public final static String CHANGE_AMOUNT = "Zmien liczbe produktow";
 	
 	//texts invoices
 	public final static String SEARCH_INVOICES = "Wyszukaj fakture";

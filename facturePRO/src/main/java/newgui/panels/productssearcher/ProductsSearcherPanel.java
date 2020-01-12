@@ -1,4 +1,4 @@
-package newgui.panels.products;
+package newgui.panels.productssearcher;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -10,12 +10,12 @@ import javax.swing.JPanel;
 import static newgui.constants.ListPanelConstants.*;
 
 /** Prints list of products. */
-public class ProductsPanel extends JFrame {
+public class ProductsSearcherPanel extends JPanel {
 	
 	ProductsSearcher searcher;
 	ProductsList list;
 	
-	public ProductsPanel() {
+	public ProductsSearcherPanel() {
 		
 		searcher = new ProductsSearcher();
 		list = new ProductsList();
@@ -33,20 +33,23 @@ public class ProductsPanel extends JFrame {
 	    // searcher
 	    gbc.gridx = 0;
 	    gbc.gridy = 0;
+	    gbc.weighty = 0.15;
 	    add(searcher, gbc);
 	    
 	    // list
 	    gbc.gridx = 0;
 	    gbc.gridy = 1;
+	    gbc.weighty = 1;
 	    add(list, gbc);
 	    
-	    setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+	    //setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	    setBackground(PANEL_COLOR);
-	    pack();
+	    //setPreferredSize(PANEL_DIMENSION);
+	    //pack();
 	    setVisible(true);
 	}
 	
 	public static void main(String [] args) {
-		new ProductsPanel();
+		new ProductsSearcherPanel();
 	}
 }

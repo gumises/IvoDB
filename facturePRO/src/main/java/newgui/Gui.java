@@ -14,7 +14,7 @@ import static newgui.constants.ButtonsPanelConstants.*;
 
 public class Gui extends JFrame {
 
-	//panels
+	// panels
 	ButtonsPanel buttonsPanel;
 	ListPanel listPanel;
 	AreaPanel areaPanel;
@@ -45,15 +45,23 @@ public class Gui extends JFrame {
 	    GridBagConstraints gbc = new GridBagConstraints();
 	    setLayout(layout);
 
+	    //gbc init
+	    gbc.weightx = 1;
+	    gbc.weighty = 1;
+	    gbc.fill = GridBagConstraints.BOTH;
+	    
 	    // buttons panel
 	    gbc.gridx = 0;
 	    gbc.gridy = 0;
+	    gbc.weighty = 0;
 	    gbc.gridwidth = 2;
 	    add(buttonsPanel, gbc);
 
 	    // list panel
 	    gbc.gridx = 0;
 	    gbc.gridy = 1;
+	    gbc.weightx = 0;
+	    gbc.weighty = 1;
 	    gbc.gridwidth = 1;
 	    add(listPanel, gbc);
 	    
@@ -71,13 +79,28 @@ public class Gui extends JFrame {
 	/** Invoked when action button is pressed. */
 	public void actionButtonPressed(String action) {
 		switch(action) {
+		case SEARCH_PRODUCTS:
+			listPanel.initProductsSearcherPanel();
+			break;
+		case ADD_PRODUCT:
+			areaPanel.initAddProductPanel();
+			break;
+		case REMOVE_PRODUCT:
+			areaPanel.initRemoveProductPanel();
+			break;
+		case CHANGE_AMOUNT:
+			areaPanel.initChangeAmountOfProductPanel();
+			break;
 		case LOG_IN:
 			initLoginDialog();
+			break;
 		}
+		pack();
 	}
 	
 	/** Invokes login dialog. */
 	public void initLoginDialog() {
+		loginDialog.setLocationRelativeTo(this);
 		loginDialog.init();
 	}
 
