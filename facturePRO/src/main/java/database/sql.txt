@@ -1,0 +1,62 @@
+
+DROP DATABASE IF EXISTS `ivodb`;
+CREATE DATABASE `ivodb`;
+USE `ivodb`;
+
+CREATE TABLE `vat` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`nazwa` VARCHAR(20) NOT NULL,
+	`mnoznik` DECIMAL NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `towar` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`nazwa` VARCHAR(100) NOT NULL,
+	`cena` DECIMAL NOT NULL,
+	`vat_id` INT NOT NULL,
+	PRIMARY KEY (`id`),
+	CONSTRAINT `fk_vat` FOREIGN KEY (`vat_id`) REFERENCES `vat` (`id`)
+);
+
+CREATE TABLE `magazyn` (
+	`towar_id` INT NOT NULL,
+	`ilosc` INT NOT NULL,
+	PRIMARY KEY (`towar_id`),
+	CONSTRAINT `fk_towar` FOREIGN KEY (`towar_id`) REFERENCES `towar` (`id`)
+);
+
+CREATE TABLE `nabywca` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`telefon` VARCHAR(20) NOT NULL,
+	`nip` VARCHAR(20) NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `adres` (
+	`nabywca_id` INT NOT NULL,
+	`kod_pocztowy` VARCHAR(6) NOT NULL,
+	`miejscowosc` VARCHAR(100) NOT NULL,
+	`ulica` VARCHAR(100) NOT NULL,
+	`numer_domu` VARCHAR(10) NOT NULL,
+	PRIMARY KEY (`nabywca_id`),
+	CONSTRAINT `fk_nabywca` FOREIGN KEY (`nabywca_id`) REFERENCES `nabywca` (`id`)
+);
+
+CREATE TABLE `faktura` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`nabywca_id` INT NOT NULL,
+	`data_wystawienia` DATE NOT NULL,
+	`data_zaplaty` DATE,
+	`numer` VARCHAR(20) NOT NULL,
+	PRIMARY KEY (`id`),
+	CONSTRAINT `fk_nabywca2` FOREIGN KEY (`nabywca_id`) REFERENCES `nabywca` (`id`)
+);
+
+CREATE TABLE `kategoria` (
+	`faktura_id` INT NOT NULL,
+	`towar_id` INT NOT NULL,
+	`ilosc` INT NOT NULL,
+	CONSTRAINT `fk_faktura` FOREIGN KEY (`faktura_id`) REFERENCES `faktura` (`id`),
+	CONSTRAINT `fk_towar2` FOREIGN KEY (`towar_id`) REFERENCES `towar` (`id`)
+);
