@@ -34,7 +34,7 @@ public class Gui extends JFrame {
 		
 		listPanel = new ListPanel();
 		
-		areaPanel = new AreaPanel();
+		areaPanel = new AreaPanel(this);
 		
 		
 		//dialogs
@@ -102,6 +102,11 @@ public class Gui extends JFrame {
 	public void initLoginDialog() {
 		loginDialog.setLocationRelativeTo(this);
 		loginDialog.init();
+	}
+	
+	/** Refreshes screens and lists. */
+	public void refresh() {
+		listPanel.refresh();
 	}
 
 	public static void main(String[] args) {

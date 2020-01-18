@@ -26,10 +26,16 @@
          1234
       </property>
       <property name="connection.pool_size">1</property>
-
-      <mapping class="database.mapped.Vat"></mapping>
-      <mapping class="database.mapped.Towar"></mapping>
-      <mapping class="database.mapped.Magazyn"></mapping>
+	  <property name="hibernate.enable_lazy_load_no_trans">true</property>
+	  
+	  <mapping class="newdatabase.Adres"></mapping>
+      <mapping class="newdatabase.Faktura"></mapping>
+      <mapping class="newdatabase.Kategoria"></mapping>
+      <mapping class="newdatabase.KategoriaId"></mapping>
+      <mapping class="newdatabase.Magazyn"></mapping>
+      <mapping class="newdatabase.Nabywca"></mapping>
+      <mapping class="newdatabase.Towar"></mapping>
+      <mapping class="newdatabase.Vat"></mapping>
       
    </session-factory>
 </hibernate-configuration>

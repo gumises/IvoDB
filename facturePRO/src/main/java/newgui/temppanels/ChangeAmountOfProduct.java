@@ -3,7 +3,6 @@ package newgui.temppanels;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import database.DatabaseConnector;
 import newgui.components.ActionButton;
 import newgui.components.ErrorLabel;
 import newgui.components.MyLabel;
@@ -12,6 +11,7 @@ import newgui.components.MyTextField;
 import static newgui.constants.AreaPanelConstants.*;
 import static newgui.constants.DataFormats.*;
 import static newgui.components.FormatterFactory.getFormat;
+import static newdatabase.connector.TowarConnector.*;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -113,7 +113,7 @@ public class ChangeAmountOfProduct extends JPanel {
 		nameValue = (String)name.getValue();
 		amountValue = (Integer)amount.getValue();
 
-		if(!DatabaseConnector.isProductExist(nameValue))
+		if(!isTowarExist(nameValue))
 			error.putError();
 		else
 			error.putMessage();
@@ -128,9 +128,9 @@ public class ChangeAmountOfProduct extends JPanel {
 		nameValue = (String)name.getValue();
 		amountValue = (Integer)amount.getValue();
 
-		if(!DatabaseConnector.isProductExist(nameValue))
+		if(!isTowarExist(nameValue))
 			error.putError();
-		else if(!DatabaseConnector.isProductAmount(amountValue))
+		else if(!tryChangeTowarAmount(nameValue, amountValue, false))
 			error.putError2();
 		else
 			error.putMessage();

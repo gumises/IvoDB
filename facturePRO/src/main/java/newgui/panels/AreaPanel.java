@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import newgui.Gui;
 import newgui.temppanels.AddProductPanel;
 import newgui.temppanels.ChangeAmountOfProduct;
 import newgui.temppanels.RemoveProductPanel;
@@ -14,6 +15,9 @@ import static newgui.constants.AreaPanelConstants.*;
 
 public class AreaPanel extends JPanel {
 
+	//parent
+	Gui parent;
+	
 	//temporary panels
 	AddProductPanel addProductPanel;
 	RemoveProductPanel removeProductPanel;
@@ -21,11 +25,14 @@ public class AreaPanel extends JPanel {
 	
 	ArrayList<JPanel> panels;
 	
-	public AreaPanel() {
+	public AreaPanel(Gui parent) {
+		
+		//parent
+		this.parent = parent;
 		
 		//temporary panels
 			panels = new ArrayList<JPanel>();
-		addProductPanel = new AddProductPanel();
+		addProductPanel = new AddProductPanel(parent);
 			panels.add(addProductPanel);
 		removeProductPanel = new RemoveProductPanel();
 			panels.add(removeProductPanel);

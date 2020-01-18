@@ -8,15 +8,26 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
+import newdatabase.Towar;
+
 import static newgui.constants.ListPanelConstants.*;
+import static newdatabase.connector.TowarConnector.*;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.List;
+import java.util.Vector;
 
 
 public class ProductsList extends JPanel {
 
 	public ProductsList() {
+ 		refresh();
+	}
+	
+	/** Refreshes screens and lists. */
+	public void refresh() {
+		this.removeAll();
  		JTable table = new JTable(prepareTableModel());
  		
  		//table.setPreferredScrollableViewportSize(TABLE_DIMENSION);
@@ -58,12 +69,13 @@ public class ProductsList extends JPanel {
 	/** Returns filled table model. */
 	public DefaultTableModel prepareTableModel() {
 		DefaultTableModel model = new DefaultTableModel(COLUMN_NAMES, 0);
-        model.addRow(new Object[]{"Prankster", "USA", "Microsoft Pvt Ltd", "Party'14", 900000});
-        model.addRow(new Object[]{"Ramanuj", "India", "Tata Consultancy", "Party'14", 500000});
-        model.addRow(new Object[]{"Banana", "India", "Tata Consultancy", "Party'14", 500000});
-        model.addRow(new Object[]{"Banana", "India", "Tata Consultancy", "Party'14", 500000});
-        model.addRow(new Object[]{"Banana", "India", "Tata Consultancy", "Party'14", 500000});
-        model.addRow(new Object[]{"Banana", "India", "Tata Consultancy", "Party'14", 500000});
+        List<Towar> towars = getTowars();
+        for(Towar towar: towars)
+        	model.addRow(new Object[]{
+        			towar.getNazwa(), 
+        			towar.getCena(), 
+        			towar.getVat().getNazwa(), 
+        			(towar.getMagazyn() != null) ? towar.getMagazyn().getIlosc() : 0});
         return model;
 	}
 	

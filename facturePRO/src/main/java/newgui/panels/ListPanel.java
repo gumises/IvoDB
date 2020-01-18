@@ -42,4 +42,9 @@ public class ListPanel extends JPanel {
 		removeAll();
 		add(productsSearcherPanel, gbc);
 	}
+	
+	/** Refreshes screens and lists. */
+	public void refresh() {
+		productsSearcherPanel.refresh();
+	}
 }

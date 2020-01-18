@@ -3,7 +3,7 @@ package newgui.temppanels;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import database.DatabaseConnector;
+import newgui.Gui;
 import newgui.components.ActionButton;
 import newgui.components.ErrorLabel;
 import newgui.components.MyLabel;
@@ -13,12 +13,18 @@ import static newgui.constants.AreaPanelConstants.*;
 import static newgui.constants.DataFormats.*;
 import static newgui.components.FormatterFactory.getFormat;
 
+import static newdatabase.connector.TowarConnector.*;
+import static newdatabase.connector.VatConnector.*;
+
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 public class AddProductPanel extends JPanel {
 
+	//parent
+	Gui parent;
+	
 	// fields
 	MyTextField name;
 	MyTextField price;
@@ -36,7 +42,9 @@ public class AddProductPanel extends JPanel {
 	double priceValue;
 	int vatValue;
 	
-	public AddProductPanel() {
+	public AddProductPanel(Gui parent) {
+		
+		this.parent = parent;
 		
 		// fields
 		name = new MyTextField(getFormat(TEXT), FIELD_FONT, PRODUCT_NAME);
@@ -110,17 +118,23 @@ public class AddProductPanel extends JPanel {
 		try {
 		nameValue = (String)name.getValue();
 		priceValue = (Double)price.getValue();
+		
 		vatValue = (Integer)vat.getValue();
-		if(DatabaseConnector.isProductExist(nameValue))
+		if(isTowarExist(nameValue))
 			error.putError();
-		else
+		else {
+			insertTowar(getVat(vatValue), nameValue, priceValue);
 			error.putMessage();
+			parent.refresh();
 		}
-		catch(Exception e) {}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static void main(String[] args) {
-		AddProductPanel panel = new AddProductPanel();
+		AddProductPanel panel = new AddProductPanel(null);
 		panel.tryAdd();
 	}
 

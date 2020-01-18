@@ -49,6 +49,11 @@ public class ProductsSearcherPanel extends JPanel {
 	    setVisible(true);
 	}
 	
+	/** Refreshes screens and lists. */
+	public void refresh() {
+		list.refresh();
+	}
+	
 	public static void main(String [] args) {
 		new ProductsSearcherPanel();
 	}
