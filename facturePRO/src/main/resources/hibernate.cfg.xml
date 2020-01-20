@@ -19,11 +19,11 @@
       </property>
       
       <property name = "hibernate.connection.username">
-         root
+root
       </property>
       
       <property name = "hibernate.connection.password">
-         1234
+root
       </property>
       <property name="connection.pool_size">1</property>
 	  <property name="hibernate.enable_lazy_load_no_trans">true</property>

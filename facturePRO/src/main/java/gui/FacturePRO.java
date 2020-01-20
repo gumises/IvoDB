@@ -9,8 +9,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import com.sun.prism.paint.Color;
-
 public class FacturePRO extends JFrame {
 
   // buttons
