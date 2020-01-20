@@ -70,7 +70,7 @@ public class Towar implements java.io.Serializable {
 		this.vat = vat;
 	}
 
-	@Column(name = "nazwa", nullable = false, length = 100)
+	@Column(name = "nazwa", nullable = false, length = 100, unique = true)
 	public String getNazwa() {
 		return this.nazwa;
 	}

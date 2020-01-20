@@ -120,13 +120,13 @@ public class AddProductPanel extends JPanel {
 		priceValue = (Double)price.getValue();
 		
 		vatValue = (Integer)vat.getValue();
-		if(isTowarExist(nameValue))
-			error.putError();
-		else {
+		//if(isTowarExist(nameValue))
+		//	error.putError();
+		//else {
 			insertTowar(getVat(vatValue), nameValue, priceValue);
 			error.putMessage();
-			parent.refresh();
-		}
+		//	parent.refresh();
+		//}
 		}
 		catch(Exception e) {
 			e.printStackTrace();
