@@ -64,7 +64,7 @@ public class TowarConnector {
 	
 	/** Returns list of Towars. */
 	public static List<Towar> getTowars() {
-		 
+
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -90,4 +90,7 @@ public class TowarConnector {
         session.close();
 	}
 
+    public static boolean isTowarAmount(String towar5, int i) {
+	    return true;
+    }
 }

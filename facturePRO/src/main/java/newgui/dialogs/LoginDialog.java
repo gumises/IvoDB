@@ -2,6 +2,7 @@ package newgui.dialogs;
 
 import javax.swing.JDialog;
 
+import newdatabase.HibernateUtil;
 import newgui.components.ActionButton;
 import newgui.components.MyLabel;
 import newgui.components.MyTextField;
@@ -81,10 +82,15 @@ public class LoginDialog extends JDialog {
 	    
 	    // button
 	    gbc.gridx = 0;
-	    gbc.gridy = 2;
+	    gbc.gridy = 3;
 	    gbc.gridwidth = 2;
 	    add(button, gbc);
-	    
+
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+		gbc.gridwidth = 2;
+		add(wrongDataLabel, gbc);
+
 	    setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	    setPreferredSize(DIALOG_DIMENSION);
 	    setBackground(DIALOG_COLOR);
@@ -101,11 +107,21 @@ public class LoginDialog extends JDialog {
 	
 	/** Invoked when user presses login button. */
 	public void tryLogIn() {
+		wrongDataLabel.setText("");
 		login = loginField.getText();
 		password = passwordField.getText();
-		System.out.println("login: \"" + login + "\"");
-		System.out.println("password: \"" + password + "\"");
-	}
+		try {
+			HibernateUtil.createNewSession(password, login);
+			HibernateUtil.getSessionFactory().openSession().beginTransaction();
+		}
+		catch(Exception e)
+		{
+			System.out.println("Unsuccessful logging ");
+			HibernateUtil.reset();
+			wrongDataLabel.setText("Try again");
+		}
+		}
+
 	
 	public static void main(String[] args) {
 		new LoginDialog();

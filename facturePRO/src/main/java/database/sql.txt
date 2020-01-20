@@ -3,6 +3,10 @@ DROP DATABASE IF EXISTS `ivodb`;
 CREATE DATABASE `ivodb`;
 USE `ivodb`;
 
+CREATE USER 'new'@'localhost' IDENTIFIED BY 'pass';
+GRANT ALL PRIVILEGES ON *.* to 'new'@'localhost';
+CREATE USER 'neww'@'localhost' IDENTIFIED BY '111';
+GRANT ALL PRIVILEGES ON *.* to 'neww'@'localhost';
 CREATE TABLE `vat` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`nazwa` VARCHAR(20) NOT NULL,
@@ -12,7 +16,7 @@ CREATE TABLE `vat` (
 
 CREATE TABLE `towar` (
 	`id` INT NOT NULL AUTO_INCREMENT,
-	`nazwa` VARCHAR(100) NOT NULL,
+	`nazwa` VARCHAR(100) NOT NULL UNIQUE,
 	`cena` DECIMAL NOT NULL,
 	`vat_id` INT NOT NULL,
 	PRIMARY KEY (`id`),
@@ -27,9 +31,10 @@ CREATE TABLE `magazyn` (
 );
 
 CREATE TABLE `nabywca` (
+    `nazwa` VARCHAR(100) UNIQUE,
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`telefon` VARCHAR(20) NOT NULL,
-	`nip` VARCHAR(20) NOT NULL,
+	`nip` VARCHAR(20) NOT NULL UNIQUE,
 	PRIMARY KEY (`id`)
 );
 
@@ -48,7 +53,7 @@ CREATE TABLE `faktura` (
 	`nabywca_id` INT NOT NULL,
 	`data_wystawienia` DATE NOT NULL,
 	`data_zaplaty` DATE,
-	`numer` VARCHAR(20) NOT NULL,
+	`numer` VARCHAR(20) NOT NULL UNIQUE,
 	PRIMARY KEY (`id`),
 	CONSTRAINT `fk_nabywca2` FOREIGN KEY (`nabywca_id`) REFERENCES `nabywca` (`id`)
 );
@@ -58,5 +63,225 @@ CREATE TABLE `kategoria` (
 	`towar_id` INT NOT NULL,
 	`ilosc` INT NOT NULL,
 	CONSTRAINT `fk_faktura` FOREIGN KEY (`faktura_id`) REFERENCES `faktura` (`id`),
-	CONSTRAINT `fk_towar2` FOREIGN KEY (`towar_id`) REFERENCES `towar` (`id`)
+	CONSTRAINT `fk_towar2` FOREIGN KEY (`towar_id`) REFERENCES `towar` (`id`),
+	UNIQUE (faktura_id,ilosc)
 );
+
+DELIMITER $$
+CREATE TRIGGER faktura_update BEFORE UPDATE ON faktura
+FOR EACH ROW
+BEGIN
+IF(new.numer LIKE '%[^0-9]%')
+THEN
+ SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'Numer contains not only digits';
+END IF;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER faktura_insert BEFORE INSERT ON faktura
+FOR EACH ROW
+BEGIN
+IF(new.numer LIKE '%[^0-9]%')
+THEN
+ SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'Numer contains not only digits';
+END IF;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER nabywca_update BEFORE UPDATE ON nabywca
+FOR EACH ROW
+BEGIN
+IF(new.telefon LIKE '%[^0-9+]%')
+THEN
+ SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'Telefon contains not only digits';
+END IF;
+IF(new.nip LIKE '%[^0-9]%')
+THEN
+ SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'NIP contains not only digits';
+END IF;
+IF(new.nazwa LIKE '%[^0-9a-zA-Z]%')
+THEN
+ SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'Nazwa contains inappropriate symbols';
+END IF;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER nabywca_insert BEFORE INSERT ON nabywca
+FOR EACH ROW
+BEGIN
+IF(new.telefon LIKE '%[^0-9+]%')
+THEN
+ SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'Telefon contains not only digits';
+END IF;
+IF(new.nip LIKE '%[^0-9]%')
+THEN
+ SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'NIP contains not only digits';
+END IF;
+IF(new.nazwa LIKE '%[^0-9a-zA-Z]%')
+THEN
+ SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'Nazwa contains inappropriate symbols';
+END IF;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER adres_update BEFORE UPDATE ON adres
+FOR EACH ROW
+BEGIN
+IF(new.kod_pocztowy LIKE '%[^0-9-]%' OR new.kod_pocztowy  LIKE '^??-???')
+THEN
+ SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'Inappropriate postal code';
+END IF;
+IF(new.miejscowosc LIKE '%[^0-9a-zA-Z-]%')
+THEN
+ SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'Inappropriate city name';
+END IF;
+IF(new.ulica LIKE '%[^0-9a-zA-Z-]%')
+THEN
+ SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'Inappropriate adress';
+END IF;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER adres_insert BEFORE INSERT ON adres
+FOR EACH ROW
+BEGIN
+IF(new.kod_pocztowy LIKE '%[^0-9-]%' OR new.kod_pocztowy  LIKE '^??-???')
+THEN
+ SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'Inappropriate postal code';
+END IF;
+IF(new.miejscowosc LIKE '%[^0-9a-zA-Z-]%')
+THEN
+ SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'Inappropriate city name';
+END IF;
+IF(new.ulica LIKE '%[^0-9a-zA-Z-]%')
+THEN
+ SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'Inappropriate adress';
+END IF;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER kategoria_update BEFORE UPDATE ON kategoria
+FOR EACH ROW
+BEGIN
+IF(new.ilosc<1)
+THEN
+ SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'Illegal quantity';
+END IF;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER kategoria_insert BEFORE INSERT ON kategoria
+FOR EACH ROW
+BEGIN
+IF(new.ilosc<1)
+THEN
+ SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'Illegal quantity';
+END IF;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER towar_update BEFORE UPDATE ON towar
+FOR EACH ROW
+BEGIN
+IF(new.cena<=0)
+THEN
+ SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'Illegal cost';
+END IF;
+IF(new.nazwa LIKE '%[^0-9a-zA-Z]%')
+THEN
+ SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'Illegal name';
+END IF;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER towar_insert BEFORE INSERT ON towar
+FOR EACH ROW
+BEGIN
+IF(new.cena<=0)
+THEN
+ SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'Illegal cost';
+END IF;
+IF(new.nazwa LIKE '%[^0-9a-zA-Z]%')
+THEN
+ SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'Illegal name';
+END IF;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER magazyn_update BEFORE UPDATE ON magazyn
+FOR EACH ROW
+BEGIN
+IF(new.ilosc<0)
+THEN
+ SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'Illegal quantity';
+END IF;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER magazyn_insert BEFORE INSERT ON magazyn
+FOR EACH ROW
+BEGIN
+IF(new.ilosc<0)
+THEN
+ SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'Illegal quantity';
+END IF;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER vat_update BEFORE UPDATE ON  vat
+FOR EACH ROW
+BEGIN
+IF(FALSE)
+THEN
+ SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'ERROR';
+END IF;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER  vat_insert BEFORE INSERT ON  vat
+FOR EACH ROW
+BEGIN
+IF(FALSE)
+THEN
+ SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'ERROR';
+
+END IF;
+END $$
+DELIMITER ;
