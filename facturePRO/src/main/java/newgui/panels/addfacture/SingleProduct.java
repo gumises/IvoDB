@@ -44,12 +44,12 @@ class SingleProduct extends JPanel {
 		this.towar = towar;
 		number = new MyLabel("", PRODUCT_FONT, PRODUCT_COLOR);
 		name = new MyLabel(towar.getNazwa(), PRODUCT_FONT, PRODUCT_COLOR);
-		amount = new MyTextField(getFormat(INTEGER), FIELD_FONT, "ilosc:");
+		amount = new MyTextField(getFormat(INTEGER), FIELD_FONT, "0");
 		nettoPrice = new MyLabel(towar.getCena(), PRODUCT_FONT, PRODUCT_COLOR);
-		nettoValue = new MyLabel(0.0, PRODUCT_FONT, PRODUCT_COLOR);
+		nettoValue = new MyLabel(0.00, PRODUCT_FONT, PRODUCT_COLOR);
 		vat = new MyLabel(towar.getVat().getMnoznik(), PRODUCT_FONT, PRODUCT_COLOR);
-		vatValue = new MyLabel(0.0, PRODUCT_FONT, PRODUCT_COLOR);
-		bruttoValue = new MyLabel(0.0, PRODUCT_FONT, PRODUCT_COLOR);
+		vatValue = new MyLabel(0.00, PRODUCT_FONT, PRODUCT_COLOR);
+		bruttoValue = new MyLabel(0.00, PRODUCT_FONT, PRODUCT_COLOR);
 
 		remove = new ActionButton("-", REMOVE_PRODUCT_COLOR, REMOVE_PRODUCT_FONT);
 		remove.addActionListener(event -> parent.removeProducs(this));
@@ -60,8 +60,8 @@ class SingleProduct extends JPanel {
 		add(name);
 		add(amount);
 		add(nettoPrice);
-		add(nettoValue);
 		add(vat);
+		add(nettoValue);
 		add(vatValue);
 		add(bruttoValue);
 		add(remove);
@@ -71,9 +71,13 @@ class SingleProduct extends JPanel {
 
 			@Override
 			public void focusLost(FocusEvent arg0) {
+				if(amount.getMyValue() == null)
+					amount.setValue(0);
 				setValues();
 			}
 		});
+		
+		setPreferredSize(ADD_FACTURE_LABEL);
 	}
 	
 	public void setNumber(int newNumber) {
@@ -84,8 +88,13 @@ class SingleProduct extends JPanel {
 		System.out.println("setting");
 		Integer amountt = (Integer)amount.getValue();
 		
-		if(amountt == null)
+		if(amountt == null) {
+			nettoValue.setValue(0);
+			vatValue.setValue(0);
+			bruttoValue.setValue(0);
+			parent.setValues();
 			return;
+		}
 		
 		Double vatt = (double)towar.getVat().getMnoznik()/100;
 		Double pricee = towar.getCena();
@@ -93,5 +102,16 @@ class SingleProduct extends JPanel {
 		nettoValue.setValue(pricee * amountt);
 		vatValue.setValue(pricee * amountt * vatt);
 		bruttoValue.setValue(pricee * amountt * (1 + vatt));
+		
+		parent.setValues();
+	}
+	
+	public double[] getValues() {
+		
+		return new double[] {
+				nettoValue.getValue(),
+				vatValue.getValue(),
+				bruttoValue.getValue()
+		};
 	}
 }

@@ -2,6 +2,7 @@ package newgui.panels.addfacture;
 
 import java.awt.GridLayout;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import newdatabase.Towar;
@@ -10,29 +11,29 @@ import newgui.components.MyLabel;
 import static newgui.constants.AreaPanelConstants.*;
 
 /** Products labels in products panel. */
-class ProductsLabel extends JPanel {
+class ProductsSumLabel extends JPanel {
 
-	MyLabel number;
-	MyLabel name;
-	MyLabel amount;
-	MyLabel nettoPrice;
+	JLabel number;
+	JLabel name;
+	JLabel amount;
+	JLabel nettoPrice;
 	MyLabel nettoValue;
 	MyLabel vat;
 	MyLabel vatValue;
 	MyLabel bruttoValue;
-	MyLabel remove;
+	JLabel remove;
 
-	public ProductsLabel() {
+	public ProductsSumLabel() {
 		super();
-		number = new MyLabel("l.p.", PRODUCT_LABEL_FONT, PRODUCT_LABEL_COLOR);
-		name = new MyLabel("nazwa", PRODUCT_LABEL_FONT, PRODUCT_LABEL_COLOR);
-		amount = new MyLabel("liczba", PRODUCT_LABEL_FONT, PRODUCT_LABEL_COLOR);
-		nettoPrice = new MyLabel("cena netto", PRODUCT_LABEL_FONT, PRODUCT_LABEL_COLOR);
-		nettoValue = new MyLabel("wartosc netto", PRODUCT_LABEL_FONT, PRODUCT_LABEL_COLOR);
-		vat = new MyLabel("stawka vat %", PRODUCT_LABEL_FONT, PRODUCT_LABEL_COLOR);
+		number = new JLabel();
+		name = new JLabel();
+		amount = new JLabel();
+		nettoPrice = new JLabel();
+		nettoValue = new MyLabel("podsumowanie", PRODUCT_LABEL_FONT, PRODUCT_LABEL_COLOR);
+		vat = new MyLabel("wartosc netto", PRODUCT_LABEL_FONT, PRODUCT_LABEL_COLOR);
 		vatValue = new MyLabel("wartosc vat", PRODUCT_LABEL_FONT, PRODUCT_LABEL_COLOR);
 		bruttoValue = new MyLabel("wartosc brutto", PRODUCT_LABEL_FONT, PRODUCT_LABEL_COLOR);
-		remove = new MyLabel("usun", PRODUCT_LABEL_FONT, PRODUCT_LABEL_COLOR);
+		remove = new JLabel();
 		
 		setLayout(new GridLayout(1,0));
 
@@ -40,8 +41,8 @@ class ProductsLabel extends JPanel {
 		add(name);
 		add(amount);
 		add(nettoPrice);
-		add(vat);
 		add(nettoValue);
+		add(vat);
 		add(vatValue);
 		add(bruttoValue);
 		add(remove);

@@ -95,4 +95,8 @@ public class MyLabel extends JLabel {
 		this.value = (double)newValue;
 		setText(Integer.toString(newValue));
 	}
+	
+	public Double getValue() {
+		return value;
+	}
 }

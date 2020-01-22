@@ -19,6 +19,9 @@ public class AddFacturePanel extends JFrame {
 	//components
 	FactureData data;
 	FactureProducts products;
+	ProductsLabel label;
+	ProductsSumLabel sumLabel;
+	SingleSum singleSum;
 	
 	public AddFacturePanel(Gui parent) {
 		this.parent = parent;
@@ -26,6 +29,9 @@ public class AddFacturePanel extends JFrame {
 		//components
 		data = new FactureData(parent);
 		products = new FactureProducts(this);
+		label = new ProductsLabel();
+		sumLabel = new ProductsSumLabel();
+		singleSum = new SingleSum();
 		
 	    // gridBagLayout
 	    GridBagLayout layout = new GridBagLayout();
@@ -37,16 +43,35 @@ public class AddFacturePanel extends JFrame {
 	    gbc.weighty = 1;
 	    gbc.insets = new Insets(3,3,3,3);
 	    gbc.fill = GridBagConstraints.BOTH;
+	    gbc.anchor = GridBagConstraints.NORTH;
 	    
 	    // data
 	    gbc.gridx = 0;
 	    gbc.gridy = 0;
 	    add(data, gbc);
 	    
-	    // products
+	    // label
 	    gbc.gridx = 0;
 	    gbc.gridy = 1;
+	    add(label, gbc);
+	    
+	    // products
+	    gbc.gridx = 0;
+	    gbc.gridy = 2;
 	    add(products, gbc);
+	    
+	    // sum label
+	    gbc.gridx = 0;
+	    gbc.gridy = 3;
+	    gbc.insets = new Insets(3,3,0,3);
+	    add(sumLabel, gbc);
+	    
+	    // single sum
+	    gbc.gridx = 0;
+	    gbc.gridy = 4;
+	    gbc.insets = new Insets(0,3,3,3);
+	    add(singleSum, gbc);
+	    
 	    
 	    setDefaultCloseOperation(EXIT_ON_CLOSE);
 	    setBackground(PANEL_COLOR);
