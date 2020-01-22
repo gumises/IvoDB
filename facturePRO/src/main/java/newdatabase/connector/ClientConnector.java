@@ -59,12 +59,29 @@ public class ClientConnector {
         return nabywcy;
     }
 	
+	/** Returns Nabywca object by name. */
+	public static Nabywca getClient(String name) {
+		 
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        
+        List<Nabywca> clients = session.createQuery("from Nabywca WHERE nazwa='"+name+"'").list();
+        
+        session.getTransaction().commit();
+        session.close();
+        
+        return clients.get(0);
+    }
+	
 	public static void main(String [] args) {
-		List<Nabywca> clients = getClients(null, null, null);
+		//List<Nabywca> clients = getClients(null, null, null);
 		
-		for(Nabywca client: clients)
-			System.out.println(client);
-		System.out.println(clients.size());
+		//for(Nabywca client: clients)
+		//	System.out.println(client);
+		//System.out.println(clients.size());
+		
+		System.out.println(getClient("weqweq"));
 	}
 	
 }

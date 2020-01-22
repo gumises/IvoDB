@@ -27,7 +27,7 @@ public class TowarConnector {
         return towar;
     }
 	
-	/** Checks if products is already in the database. */
+	/** Tries change amount of specific product. */
 	public static void changeTowarAmount(String name, int amount) throws Exception {
 		
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();

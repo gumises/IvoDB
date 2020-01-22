@@ -39,6 +39,9 @@ public class AreaPanelConstants {
 		public final static String PURCH_ERROR = "Duplikacja nazwy lub niepoprawne dane!";
 		public final static String PURCH_MESSAGE = "Dodano pomyślnie.";
 	
+	//texts add facture data
+		public final static String NO_CLIENT_TEXT = "Nie wybrano nabywcy";
+		
 	//texts dynamic query panel
 		public final static String QUERY_TITLE = "Zapytanie dynamiczne";
 		public final static String QUERY_NAME = "zapytanie:";
@@ -55,39 +58,20 @@ public class AreaPanelConstants {
 	public final static Font BUTTON_FONT = new Font("sansserif", Font.BOLD, 20);
 	public final static Font ERROR_FONT = new Font("sansserif", Font.PLAIN, 15);
 	public final static Font LABEL_FONT = new Font("sansserif", Font.PLAIN, 18);
+	public final static Font DATA_FONT = new Font("sansserif", Font.PLAIN, 18);
 	
 	//colors
 	public final static Color PANEL_COLOR = Color.LIGHT_GRAY;
 	public final static Color BUTTON_COLOR = Color.DARK_GRAY;
 	public final static Color ERROR_COLOR = Color.RED;
 	public final static Color BORDER_COLOR = Color.BLACK;
+	public final static Color DATA_COLOR = Color.BLACK;
 	
 	//dimensions
 	public final static Dimension PANEL_DIMENSION = new Dimension(400,300);
 	public final static Dimension PANEL_DIMENSION2 = new Dimension(400,600);
 	public final static Dimension MAINPANEL_DIMENSION = new Dimension(800,800);
-	/*
-	//texts
-	public final static String SEARCH_TEXT = "Wyszukaj";
-	public final static String NAME_TEXT = "nazwa:";
-	public final static String MAXPRICE_TEXT = "cena max:";
-	public final static String MINPRICE_TEXT = "cena min:";
-	public final static String MINWAREHOUSE_TEXT = "min magazyn:";
-	
-	//dimensions
-	public final static Dimension SEARCHER_DIMENSION = new Dimension(400,220);
-	public final static Dimension NAME_DIM = new Dimension(350,600);
-	
-	//colors
-	public final static Color PANEL_COLOR = Color.LIGHT_GRAY;
-	public final static Color SEARCH_COLOR = Color.BLUE.brighter();
-	public final static Color LIST_COLOR = Color.LIGHT_GRAY;
-	
-	//fonts
-	
-	public final static Font LABEL_FONT = new Font("sansserif", Font.PLAIN, 17);
-	
-	*/
-	
+	public final static Dimension ADD_FACTURE_DATA = new Dimension(600,300);
+	public final static Dimension ADD_FACTURE_PRODUCTS = new Dimension(600,450);
 	private AreaPanelConstants() {}
 }
