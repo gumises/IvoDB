@@ -1,6 +1,7 @@
 package newgui.panels.addfacture;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -30,7 +31,7 @@ public class FactureProducts extends JPanel {
 		this.parent = parent;
 		products = new ArrayList<SingleProduct>();
 		setBackground(Color.RED);
-		//setPreferredSize(ADD_FACTURE_PRODUCTS);
+		//setMaximumSize(new Dimension(100,100));
 		counter = 0;
 		
 		// gridBagLayout
@@ -43,7 +44,7 @@ public class FactureProducts extends JPanel {
 		con.gridy = 0;
 		con.gridx = 0;
 		con.weightx = 1;
-		con.weighty = 1;
+		con.weighty = 0;
 		con.anchor = GridBagConstraints.NORTH;
 		
 	}

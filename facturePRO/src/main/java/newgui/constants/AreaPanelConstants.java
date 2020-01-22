@@ -52,6 +52,7 @@ public class AreaPanelConstants {
 	public final static String BUTTON_ADD = "Dodaj";
 	public final static String BUTTON_REMOVE = "Usun";
 	public final static String BUTTON_PERFORM = "Wykonaj";
+	public final static String ADD_FACTURE_BUTTON_TEXT = "Zatwierdz";
 	
 	//fonts
 	public final static Font FIELD_FONT = new Font("sansserif", Font.PLAIN, 17);
@@ -62,6 +63,7 @@ public class AreaPanelConstants {
 	public final static Font PRODUCT_FONT = new Font("sansserif", Font.PLAIN, 12);
 	public final static Font PRODUCT_LABEL_FONT = new Font("sansserif", Font.BOLD, 12);
 	public final static Font REMOVE_PRODUCT_FONT = new Font("sansserif", Font.BOLD, 15);
+	public final static Font ADD_FACTURE_BUTTON_FONT = new Font("sansserif", Font.BOLD, 15);
 	
 	//colors
 	public final static Color PANEL_COLOR = Color.LIGHT_GRAY;
@@ -72,6 +74,7 @@ public class AreaPanelConstants {
 	public final static Color PRODUCT_COLOR = Color.BLACK;
 	public final static Color PRODUCT_LABEL_COLOR = Color.BLACK;
 	public final static Color REMOVE_PRODUCT_COLOR = Color.RED;
+	public final static Color ADD_FACTURE_BUTTON_COLOR = Color.BLUE;;
 	
 	//dimensions
 	public final static Dimension PANEL_DIMENSION = new Dimension(400,300);
@@ -80,6 +83,7 @@ public class AreaPanelConstants {
 	public final static Dimension ADD_FACTURE_DATA = new Dimension(600,300);
 	public final static Dimension ADD_FACTURE_PRODUCTS = new Dimension(600,450);
 	public final static Dimension ADD_FACTURE_LABEL = new Dimension(300,40);
+	public final static Dimension ADD_FACTURE_BUTTON_DIMENSION = new Dimension(300,75);
 	
 	private AreaPanelConstants() {}
 }
