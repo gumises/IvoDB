@@ -25,7 +25,20 @@ public class AreaPanelConstants {
 		public final static String PRODUCT_CHANGE_ERROR1 = "Nieprawidlowa nazwa lub ilosc towaru!";
 		public final static String PRODUCT_CHANGE_ERROR2 = "Za malo produktow w magazynie!";
 		public final static String PRODUCT_CHANGE_MESSAGE = "Zmieniono pomyslnie.";
-		
+	
+	//texts add purchaser panel
+		public final static String PURCH_NAME = "nazwa:";
+		public final static String PURCH_PHONE = "telefon:";
+		public final static String PURCH_NIP = "nip:";
+		public final static String PURCH_CITY = "miejscowosc:";
+		public final static String PURCH_STREET = "ulica:";
+		public final static String PURCH_HOUSE = "nr. domu:";
+		public final static String PURCH_POST = "kod poczt.:";
+		public final static String PURCH_TITLE1 = "Dane firmy";
+		public final static String PURCH_TITLE2 = "Dane kontaktowe";
+		public final static String PURCH_ERROR = "Duplikacja nazwy lub niepoprawne dane!";
+		public final static String PURCH_MESSAGE = "Dodano pomyślnie.";
+				
 	//texts common
 	public final static String BUTTON_ADD = "Dodaj";
 	public final static String BUTTON_REMOVE = "Usun";
@@ -44,6 +57,7 @@ public class AreaPanelConstants {
 	
 	//dimensions
 	public final static Dimension PANEL_DIMENSION = new Dimension(400,300);
+	public final static Dimension PANEL_DIMENSION2 = new Dimension(400,600);
 	public final static Dimension MAINPANEL_DIMENSION = new Dimension(800,800);
 	/*
 	//texts

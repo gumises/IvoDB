@@ -29,9 +29,9 @@ CREATE TABLE `magazyn` (
 	PRIMARY KEY (`towar_id`),
 	CONSTRAINT `fk_towar` FOREIGN KEY (`towar_id`) REFERENCES `towar` (`id`)
 );
-
+	
 CREATE TABLE `nabywca` (
-    `nazwa` VARCHAR(100) UNIQUE,
+    `nazwa` VARCHAR(100) UNIQUE NOT NULL,
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`telefon` VARCHAR(20) NOT NULL,
 	`nip` VARCHAR(20) NOT NULL UNIQUE,

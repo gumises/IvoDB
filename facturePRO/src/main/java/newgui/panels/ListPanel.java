@@ -3,6 +3,7 @@ package newgui.panels;
 import javax.swing.JPanel;
 
 import newgui.Gui;
+import newgui.panels.clientssearcher.ClientsSearcherPanel;
 import newgui.panels.productssearcher.ProductsList;
 import newgui.panels.productssearcher.ProductsSearcherPanel;
 
@@ -16,8 +17,9 @@ public class ListPanel extends JPanel {
 	//parent
 	Gui parent;
 	
-	public	//temporary panels
+	//temporary panels
 	ProductsSearcherPanel productsSearcherPanel;
+	ClientsSearcherPanel clientsSearcherPanel;
 	GridBagConstraints gbc;
 	
 	
@@ -27,6 +29,7 @@ public class ListPanel extends JPanel {
 		
 		//temporary panels
 		productsSearcherPanel = new ProductsSearcherPanel(parent);
+		clientsSearcherPanel = new ClientsSearcherPanel(parent);
 		
 	    // gridBagLayout
 	    GridBagLayout layout = new GridBagLayout();
@@ -48,6 +51,13 @@ public class ListPanel extends JPanel {
 		removeAll();
 		productsSearcherPanel.refresh();
 		add(productsSearcherPanel, gbc);
+	}
+	
+	/** Sets the add product panel to be visible. */
+	public void initClientsSearcherPanel() {
+		removeAll();
+		clientsSearcherPanel.refresh();
+		add(clientsSearcherPanel, gbc);
 	}
 	
 	/** Refreshes screens and lists. */

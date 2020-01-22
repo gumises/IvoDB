@@ -74,6 +74,8 @@ public class Gui extends JFrame {
 	    setDefaultCloseOperation(EXIT_ON_CLOSE);
 	    setTitle("IvoDB");
 	    setVisible(true);
+	    
+	    refresh(SEARCH_PRODUCTS);
 	}
 	
 	/** Invoked when action button is pressed. */
@@ -93,6 +95,12 @@ public class Gui extends JFrame {
 			break;
 		case LOG_IN:
 			initLoginDialog();
+			break;
+		case ADD_CLIENT:
+			areaPanel.initAddPurchaserPanel();
+			break;
+		case SEARCH_CLIENTS:
+			listPanel.initClientsSearcherPanel();
 			break;
 		}
 		pack();

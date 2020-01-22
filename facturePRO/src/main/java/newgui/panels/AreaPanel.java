@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import newgui.Gui;
 import newgui.temppanels.AddProductPanel;
+import newgui.temppanels.AddClientPanel;
 import newgui.temppanels.ChangeAmountOfProduct;
 import newgui.temppanels.RemoveProductPanel;
 
@@ -22,6 +23,7 @@ public class AreaPanel extends JPanel {
 	AddProductPanel addProductPanel;
 	RemoveProductPanel removeProductPanel;
 	ChangeAmountOfProduct changeAmountOfProduct;
+	AddClientPanel addPurchaserPanel;
 	
 	ArrayList<JPanel> panels;
 	
@@ -38,6 +40,8 @@ public class AreaPanel extends JPanel {
 			panels.add(removeProductPanel);
 		changeAmountOfProduct = new ChangeAmountOfProduct(parent);
 			panels.add(changeAmountOfProduct);
+		addPurchaserPanel = new AddClientPanel(parent);
+			panels.add(addPurchaserPanel);
 		
 	    // gridBagLayout
 	    GridBagLayout layout = new GridBagLayout();
@@ -52,6 +56,7 @@ public class AreaPanel extends JPanel {
 	    add(addProductPanel);
 	    add(removeProductPanel);
 	    add(changeAmountOfProduct);
+	    add(addPurchaserPanel);
 	    
 		setVisible(true);
 		setBackground(PANEL_COLOR);
@@ -74,6 +79,12 @@ public class AreaPanel extends JPanel {
 	public void initChangeAmountOfProductPanel() {
 		invisibleAll();
 		changeAmountOfProduct.setVisible(true);
+	}
+	
+	/** Sets the add product panel to be visible. */
+	public void initAddPurchaserPanel() {
+		invisibleAll();
+		addPurchaserPanel.setVisible(true);
 	}
 	
 	/** Sets all panels to be invisible. */
