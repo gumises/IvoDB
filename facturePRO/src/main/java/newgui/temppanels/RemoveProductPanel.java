@@ -3,15 +3,17 @@ package newgui.temppanels;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import database.DatabaseConnector;
+import newgui.Gui;
 import newgui.components.ActionButton;
 import newgui.components.ErrorLabel;
 import newgui.components.MyLabel;
 import newgui.components.MyTextField;
 
 import static newgui.constants.AreaPanelConstants.*;
+import static newgui.constants.ButtonsPanelConstants.SEARCH_PRODUCTS;
 import static newgui.constants.DataFormats.*;
 import static newgui.components.FormatterFactory.getFormat;
+import static newdatabase.connector.TowarConnector.*;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -19,6 +21,9 @@ import java.awt.Insets;
 
 public class RemoveProductPanel extends JPanel {
 
+	//parent
+	Gui parent;
+	
 	// fields
 	MyTextField name;
 	
@@ -32,7 +37,9 @@ public class RemoveProductPanel extends JPanel {
 	//values
 	String nameValue;
 	
-	public RemoveProductPanel() {
+	public RemoveProductPanel(Gui parent) {
+		
+		this.parent = parent;
 		
 		// fields
 		name = new MyTextField(getFormat(TEXT), FIELD_FONT, PRODUCT_NAME);
@@ -91,18 +98,19 @@ public class RemoveProductPanel extends JPanel {
 	/** Invoked when user presses login button. */
 	public void tryAdd() {
 		try {
-		nameValue = (String)name.getValue();
-		if(DatabaseConnector.isProductExist(nameValue))
+			nameValue = (String)name.getValue();
+			
+			removeTowar(nameValue);
 			error.putMessage();
-		
-		else
+			parent.refresh(SEARCH_PRODUCTS);
+		}
+		catch(Exception exception) {
 			error.putError();
 		}
-		catch(Exception e) {}
 	}
 	
 	public static void main(String[] args) {
-		RemoveProductPanel panel = new RemoveProductPanel();
+		RemoveProductPanel panel = new RemoveProductPanel(null);
 	}
 
 }

@@ -12,17 +12,17 @@ public class AreaPanelConstants {
 		public final static String PRODUCT_AMOUNT = "ilosc:";
 		public final static String PRODUCT_VAT = "vat:";
 		public final static String PRODUCT_TITLE = "Dodaj nowy produkt";
-		public final static String PRODUCT_ERROR = "Produkt o podanej nazwie juz istnieje!";
+		public final static String PRODUCT_ERROR = "Duplikacja nazwy lub niepoprawne dane!";
 		public final static String PRODUCT_MESSAGE = "Dodano pomyślnie.";
 	
 	//texts add product panel
 		public final static String PRODUCT_REMOVE_TITLE = "Usun produkt";
-		public final static String PRODUCT_REMOVE_ERROR = "Produkt o podanej nazwie nie istnieje!";
+		public final static String PRODUCT_REMOVE_ERROR = "Produktu o podanej nazwie nie ma w magazynie!";
 		public final static String PRODUCT_REMOVE_MESSAGE = "Usunieto pomyślnie.";
 		
 	//texts change amount of product panel
 		public final static String PRODUCT_CHANGE_TITLE = "Zmien liczbe produktow";
-		public final static String PRODUCT_CHANGE_ERROR1 = "Produkt o podanej nazwie nie istnieje!";
+		public final static String PRODUCT_CHANGE_ERROR1 = "Nieprawidlowa nazwa lub ilosc towaru!";
 		public final static String PRODUCT_CHANGE_ERROR2 = "Za malo produktow w magazynie!";
 		public final static String PRODUCT_CHANGE_MESSAGE = "Zmieniono pomyslnie.";
 		

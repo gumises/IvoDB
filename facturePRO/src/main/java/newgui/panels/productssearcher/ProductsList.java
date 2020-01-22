@@ -22,13 +22,13 @@ import java.util.Vector;
 public class ProductsList extends JPanel {
 
 	public ProductsList() {
- 		refresh();
+ 		refresh(null, null, null, null);
 	}
 	
 	/** Refreshes screens and lists. */
-	public void refresh() {
+	public void refresh(String name, Double maxPrice, Double minPrice, Integer minAmount) {
 		this.removeAll();
- 		JTable table = new JTable(prepareTableModel());
+ 		JTable table = new JTable(prepareTableModel(name, maxPrice, minPrice, minAmount));
  		
  		//table.setPreferredScrollableViewportSize(TABLE_DIMENSION);
  		table.setAutoCreateRowSorter(true);
@@ -67,9 +67,13 @@ public class ProductsList extends JPanel {
 	}
 	
 	/** Returns filled table model. */
-	public DefaultTableModel prepareTableModel() {
+	public DefaultTableModel prepareTableModel(String name, Double maxPrice, Double minPrice, Integer minAmount) {
+		System.out.println("refreshing!");
 		DefaultTableModel model = new DefaultTableModel(COLUMN_NAMES, 0);
-        List<Towar> towars = getTowars();
+        List<Towar> towars = getTowars(name, maxPrice, minPrice, minAmount);
+        for(Towar towar: towars)
+        	System.out.println(towar);
+        System.out.println(towars.size());
         for(Towar towar: towars)
         	model.addRow(new Object[]{
         			towar.getNazwa(), 

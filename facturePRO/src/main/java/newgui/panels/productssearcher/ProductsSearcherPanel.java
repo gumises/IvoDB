@@ -7,17 +7,28 @@ import java.awt.Insets;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import newgui.Gui;
+
 import static newgui.constants.ListPanelConstants.*;
 
 /** Prints list of products. */
 public class ProductsSearcherPanel extends JPanel {
 	
+	//parent
+	Gui parent;
+	
 	ProductsSearcher searcher;
 	ProductsList list;
 	
-	public ProductsSearcherPanel() {
-		
-		searcher = new ProductsSearcher();
+	public ProductsSearcherPanel(Gui parent) {
+		this.parent = parent;
+		refresh();
+	}
+	
+	/** Refreshes screens and lists. */
+	public void refresh() {
+		removeAll();
+		searcher = new ProductsSearcher(this);
 		list = new ProductsList();
 		
 	    // gridBagLayout
@@ -49,12 +60,7 @@ public class ProductsSearcherPanel extends JPanel {
 	    setVisible(true);
 	}
 	
-	/** Refreshes screens and lists. */
-	public void refresh() {
-		list.refresh();
-	}
-	
 	public static void main(String [] args) {
-		new ProductsSearcherPanel();
+		new ProductsSearcherPanel(null);
 	}
 }

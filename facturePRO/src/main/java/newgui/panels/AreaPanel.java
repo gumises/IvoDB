@@ -34,9 +34,9 @@ public class AreaPanel extends JPanel {
 			panels = new ArrayList<JPanel>();
 		addProductPanel = new AddProductPanel(parent);
 			panels.add(addProductPanel);
-		removeProductPanel = new RemoveProductPanel();
+		removeProductPanel = new RemoveProductPanel(parent);
 			panels.add(removeProductPanel);
-		changeAmountOfProduct = new ChangeAmountOfProduct();
+		changeAmountOfProduct = new ChangeAmountOfProduct(parent);
 			panels.add(changeAmountOfProduct);
 		
 	    // gridBagLayout

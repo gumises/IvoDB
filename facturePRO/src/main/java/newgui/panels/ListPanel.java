@@ -2,6 +2,7 @@ package newgui.panels;
 
 import javax.swing.JPanel;
 
+import newgui.Gui;
 import newgui.panels.productssearcher.ProductsList;
 import newgui.panels.productssearcher.ProductsSearcherPanel;
 
@@ -12,15 +13,20 @@ import java.awt.GridBagLayout;
 
 public class ListPanel extends JPanel {
 
+	//parent
+	Gui parent;
+	
 	public	//temporary panels
 	ProductsSearcherPanel productsSearcherPanel;
 	GridBagConstraints gbc;
 	
 	
-	public ListPanel() {
+	public ListPanel(Gui parent) {
+		
+		this.parent = parent;
 		
 		//temporary panels
-		productsSearcherPanel = new ProductsSearcherPanel();
+		productsSearcherPanel = new ProductsSearcherPanel(parent);
 		
 	    // gridBagLayout
 	    GridBagLayout layout = new GridBagLayout();
@@ -40,6 +46,7 @@ public class ListPanel extends JPanel {
 	/** Sets the add product panel to be visible. */
 	public void initProductsSearcherPanel() {
 		removeAll();
+		productsSearcherPanel.refresh();
 		add(productsSearcherPanel, gbc);
 	}
 	

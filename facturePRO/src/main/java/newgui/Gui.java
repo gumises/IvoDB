@@ -32,7 +32,7 @@ public class Gui extends JFrame {
 			}
 		};
 		
-		listPanel = new ListPanel();
+		listPanel = new ListPanel(this);
 		
 		areaPanel = new AreaPanel(this);
 		
@@ -105,8 +105,8 @@ public class Gui extends JFrame {
 	}
 	
 	/** Refreshes screens and lists. */
-	public void refresh() {
-		listPanel.refresh();
+	public void refresh(String action) {
+		actionButtonPressed(action);
 	}
 
 	public static void main(String[] args) {

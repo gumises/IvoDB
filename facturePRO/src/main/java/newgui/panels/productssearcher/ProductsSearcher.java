@@ -1,5 +1,6 @@
 package newgui.panels.productssearcher;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import newgui.components.ActionButton;
 import newgui.components.MyTextField;
@@ -15,22 +16,27 @@ import java.awt.Insets;
 
 public class ProductsSearcher extends JPanel {
 
+	//parent
+	ProductsSearcherPanel parent;
+	
 	// fields
 	MyTextField name;
 	MyTextField maxPrice;
 	MyTextField minPrice;
-	MyTextField minWarehouse;
+	MyTextField minAmount;
 	
 	// button
 	ActionButton search;
 	
-	public ProductsSearcher() {
+	public ProductsSearcher(ProductsSearcherPanel parent) {
+		
+		this.parent = parent;
 		
 		// fields
 		name = new MyTextField(getFormat(TEXT), FIELD_FONT, NAME_TEXT);
 		maxPrice = new MyTextField(getFormat(FLOAT), FIELD_FONT, MAXPRICE_TEXT);
 		minPrice = new MyTextField(getFormat(FLOAT), FIELD_FONT, MINPRICE_TEXT);
-		minWarehouse = new MyTextField(getFormat(INTEGER), FIELD_FONT, MINWAREHOUSE_TEXT);
+		minAmount = new MyTextField(getFormat(INTEGER), FIELD_FONT, MINWAREHOUSE_TEXT);
 		
 		//button
 		search = new ActionButton(SEARCH_TEXT, SEARCH_COLOR, BUTTON_FONT);
@@ -68,7 +74,7 @@ public class ProductsSearcher extends JPanel {
 	    // max warehouse
 	    gbc.gridx = 2;
 	    gbc.gridy = 1;
-	    add(minWarehouse, gbc);
+	    add(minAmount, gbc);
 	    
 	    // search
 	    gbc.gridx = 0;
@@ -91,11 +97,28 @@ public class ProductsSearcher extends JPanel {
 	
 	/** Invoked when run button is pressed. */
 	public void search() {
-		System.out.println("wyszukuję...");
+		try {
+			String nameValue = (String)name.getMyValue();
+			Double maxPriceValue =  (Double)maxPrice.getMyValue();
+			Double minPriceValue = (Double)minPrice.getMyValue();
+			Integer minAmountValue = (Integer)minAmount.getMyValue();
+			
+			System.out.println("name      = " + nameValue);
+			System.out.println("minPrice  = " + minPriceValue);
+			System.out.println("maxPrice  = " + maxPriceValue);
+			System.out.println("minAmount = " + minAmountValue);
+			
+			parent.list.refresh(nameValue, maxPriceValue, minPriceValue, minAmountValue);
+			parent.parent.pack();
+			
+		}
+		catch(Exception exception) {
+			exception.printStackTrace();
+		}
 	}
 	
 	public static void main(String[] args) {
-		new ProductsSearcher();
+		new ProductsSearcher(null);
 	}
 
 }

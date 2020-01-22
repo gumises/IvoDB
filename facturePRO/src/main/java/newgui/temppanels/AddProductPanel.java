@@ -15,6 +15,7 @@ import static newgui.components.FormatterFactory.getFormat;
 
 import static newdatabase.connector.TowarConnector.*;
 import static newdatabase.connector.VatConnector.*;
+import static newgui.constants.ButtonsPanelConstants.SEARCH_PRODUCTS;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -116,20 +117,16 @@ public class AddProductPanel extends JPanel {
 	/** Invoked when user presses login button. */
 	public void tryAdd() {
 		try {
-		nameValue = (String)name.getValue();
-		priceValue = (Double)price.getValue();
-		
-		vatValue = (Integer)vat.getValue();
-		//if(isTowarExist(nameValue))
-		//	error.putError();
-		//else {
+			nameValue = (String)name.getValue();
+			priceValue = (Double)price.getValue();
+			vatValue = (Integer)vat.getValue();
+			
 			insertTowar(getVat(vatValue), nameValue, priceValue);
 			error.putMessage();
-		//	parent.refresh();
-		//}
+			parent.refresh(SEARCH_PRODUCTS);
 		}
-		catch(Exception e) {
-			e.printStackTrace();
+		catch (Exception exception) {
+			error.putError();
 		}
 	}
 	

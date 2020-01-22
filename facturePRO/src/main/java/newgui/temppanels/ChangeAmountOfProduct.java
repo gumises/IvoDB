@@ -3,12 +3,14 @@ package newgui.temppanels;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import newgui.Gui;
 import newgui.components.ActionButton;
 import newgui.components.ErrorLabel;
 import newgui.components.MyLabel;
 import newgui.components.MyTextField;
 
 import static newgui.constants.AreaPanelConstants.*;
+import static newgui.constants.ButtonsPanelConstants.SEARCH_PRODUCTS;
 import static newgui.constants.DataFormats.*;
 import static newgui.components.FormatterFactory.getFormat;
 import static newdatabase.connector.TowarConnector.*;
@@ -19,6 +21,9 @@ import java.awt.Insets;
 
 public class ChangeAmountOfProduct extends JPanel {
 
+	//parent
+	Gui parent;
+	
 	// fields
 	MyTextField name;
 	MyTextField amount;
@@ -35,8 +40,9 @@ public class ChangeAmountOfProduct extends JPanel {
 	String nameValue;
 	int amountValue;
 	
-	public ChangeAmountOfProduct() {
+	public ChangeAmountOfProduct(Gui parent) {
 		
+		this.parent = parent;
 		// fields
 		name = new MyTextField(getFormat(TEXT), FIELD_FONT, PRODUCT_NAME);
 		amount = new MyTextField(getFormat(INTEGER), FIELD_FONT, PRODUCT_AMOUNT);
@@ -47,10 +53,10 @@ public class ChangeAmountOfProduct extends JPanel {
 		
 		//buttons
 		add = new ActionButton(BUTTON_ADD, BUTTON_COLOR, BUTTON_FONT);
-		add.addActionListener(event -> tryAdd());
+		add.addActionListener(event -> tryChange(1));
 		
 		remove = new ActionButton(BUTTON_REMOVE, BUTTON_COLOR, BUTTON_FONT);
-		remove.addActionListener(event -> tryRemove());
+		remove.addActionListener(event -> tryChange(-1));
 		
 	    // gridBagLayout
 	    GridBagLayout layout = new GridBagLayout();
@@ -107,40 +113,23 @@ public class ChangeAmountOfProduct extends JPanel {
 	}
 	
 	/** Invoked when user presses add button. */
-	public void tryAdd() {
+	public void tryChange(int multiplier) {
 		
 		try {
-		nameValue = (String)name.getValue();
-		amountValue = (Integer)amount.getValue();
-
-		if(!isTowarExist(nameValue))
-			error.putError();
-		else
+			nameValue = (String)name.getValue();
+			amountValue = (Integer)amount.getValue() * multiplier;
+			
+			changeTowarAmount(nameValue, amountValue);
 			error.putMessage();
+			parent.refresh(SEARCH_PRODUCTS);
 		}
-		catch(Exception e) {}
+		catch(Exception e) {
+			error.putError();
+		}
 		
-	}
-	
-	/** Invoked when user presses remove button. */
-	public void tryRemove() {
-		try {
-		nameValue = (String)name.getValue();
-		amountValue = (Integer)amount.getValue();
-
-		if(!isTowarExist(nameValue))
-			error.putError();
-		else if(!tryChangeTowarAmount(nameValue, amountValue, false))
-			error.putError2();
-		else
-			error.putMessage();
-		}
-		catch(Exception e) {}
 	}
 	
 	public static void main(String[] args) {
-		ChangeAmountOfProduct panel = new ChangeAmountOfProduct();
-		panel.tryAdd();
 	}
 
 }

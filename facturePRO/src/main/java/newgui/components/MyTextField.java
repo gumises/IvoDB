@@ -116,4 +116,11 @@ public class MyTextField extends JFormattedTextField {
 			setForeground(DEFAULT_ON);
 		}
 	}
+	
+	public Object getMyValue() {
+		if(getValue() != null && getValue().equals(name))
+			return null;
+		else
+			return getValue();
+	}
 }
