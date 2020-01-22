@@ -38,10 +38,17 @@ public class AreaPanelConstants {
 		public final static String PURCH_TITLE2 = "Dane kontaktowe";
 		public final static String PURCH_ERROR = "Duplikacja nazwy lub niepoprawne dane!";
 		public final static String PURCH_MESSAGE = "Dodano pomyślnie.";
+	
+	//texts dynamic query panel
+		public final static String QUERY_TITLE = "Zapytanie dynamiczne";
+		public final static String QUERY_NAME = "zapytanie:";
+		public final static String QUERY_ERROR = "Bledna trest zapytania!";
+		public final static String QUERY_MESSAGE = "Wykonano poprawnie.";
 				
 	//texts common
 	public final static String BUTTON_ADD = "Dodaj";
 	public final static String BUTTON_REMOVE = "Usun";
+	public final static String BUTTON_PERFORM = "Wykonaj";
 	
 	//fonts
 	public final static Font FIELD_FONT = new Font("sansserif", Font.PLAIN, 17);

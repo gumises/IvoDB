@@ -102,6 +102,9 @@ public class Gui extends JFrame {
 		case SEARCH_CLIENTS:
 			listPanel.initClientsSearcherPanel();
 			break;
+		case DYNAMIC_QUERY:
+			areaPanel.initDynamicQueryPanel();
+			break;
 		}
 		pack();
 	}

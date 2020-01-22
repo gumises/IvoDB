@@ -10,6 +10,7 @@ import newgui.Gui;
 import newgui.temppanels.AddProductPanel;
 import newgui.temppanels.AddClientPanel;
 import newgui.temppanels.ChangeAmountOfProduct;
+import newgui.temppanels.DynamicQueryPanel;
 import newgui.temppanels.RemoveProductPanel;
 
 import static newgui.constants.AreaPanelConstants.*;
@@ -24,6 +25,7 @@ public class AreaPanel extends JPanel {
 	RemoveProductPanel removeProductPanel;
 	ChangeAmountOfProduct changeAmountOfProduct;
 	AddClientPanel addPurchaserPanel;
+	DynamicQueryPanel dynamicQueryPanel;
 	
 	ArrayList<JPanel> panels;
 	
@@ -42,7 +44,9 @@ public class AreaPanel extends JPanel {
 			panels.add(changeAmountOfProduct);
 		addPurchaserPanel = new AddClientPanel(parent);
 			panels.add(addPurchaserPanel);
-		
+		dynamicQueryPanel = new DynamicQueryPanel(parent);
+			panels.add(dynamicQueryPanel);
+			
 	    // gridBagLayout
 	    GridBagLayout layout = new GridBagLayout();
 	    GridBagConstraints gbc = new GridBagConstraints();
@@ -57,6 +61,7 @@ public class AreaPanel extends JPanel {
 	    add(removeProductPanel);
 	    add(changeAmountOfProduct);
 	    add(addPurchaserPanel);
+	    add(dynamicQueryPanel);
 	    
 		setVisible(true);
 		setBackground(PANEL_COLOR);
@@ -86,6 +91,13 @@ public class AreaPanel extends JPanel {
 		invisibleAll();
 		addPurchaserPanel.setVisible(true);
 	}
+	
+	/** Sets dynamic query panel to be visible. */
+	public void initDynamicQueryPanel() {
+		invisibleAll();
+		dynamicQueryPanel.setVisible(true);
+	}
+	
 	
 	/** Sets all panels to be invisible. */
 	public void invisibleAll() {
