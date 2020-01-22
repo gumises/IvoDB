@@ -23,18 +23,18 @@ public class Vat implements java.io.Serializable {
 	
 	private Integer id;
 	private String nazwa;
-	private long mnoznik;
+	private Integer mnoznik;
 	private Set<Towar> towars = new HashSet(0);
 
 	public Vat() {
 	}
 
-	public Vat(String nazwa, long mnoznik) {
+	public Vat(String nazwa, int mnoznik) {
 		this.nazwa = nazwa;
 		this.mnoznik = mnoznik;
 	}
 
-	public Vat(String nazwa, long mnoznik, Set<Towar> towars) {
+	public Vat(String nazwa, int mnoznik, Set<Towar> towars) {
 		this.nazwa = nazwa;
 		this.mnoznik = mnoznik;
 		this.towars = towars;
@@ -62,11 +62,11 @@ public class Vat implements java.io.Serializable {
 	}
 
 	@Column(name = "mnoznik", nullable = false, precision = 10, scale = 0)
-	public long getMnoznik() {
+	public int getMnoznik() {
 		return this.mnoznik;
 	}
 
-	public void setMnoznik(long mnoznik) {
+	public void setMnoznik(int mnoznik) {
 		this.mnoznik = mnoznik;
 	}
 

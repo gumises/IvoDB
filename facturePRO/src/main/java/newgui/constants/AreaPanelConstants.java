@@ -41,7 +41,7 @@ public class AreaPanelConstants {
 	
 	//texts add facture data
 		public final static String NO_CLIENT_TEXT = "Nie wybrano nabywcy";
-		
+	
 	//texts dynamic query panel
 		public final static String QUERY_TITLE = "Zapytanie dynamiczne";
 		public final static String QUERY_NAME = "zapytanie:";
@@ -59,6 +59,9 @@ public class AreaPanelConstants {
 	public final static Font ERROR_FONT = new Font("sansserif", Font.PLAIN, 15);
 	public final static Font LABEL_FONT = new Font("sansserif", Font.PLAIN, 18);
 	public final static Font DATA_FONT = new Font("sansserif", Font.PLAIN, 18);
+	public final static Font PRODUCT_FONT = new Font("sansserif", Font.PLAIN, 12);
+	public final static Font PRODUCT_LABEL_FONT = new Font("sansserif", Font.BOLD, 12);
+	public final static Font REMOVE_PRODUCT_FONT = new Font("sansserif", Font.BOLD, 15);
 	
 	//colors
 	public final static Color PANEL_COLOR = Color.LIGHT_GRAY;
@@ -66,6 +69,9 @@ public class AreaPanelConstants {
 	public final static Color ERROR_COLOR = Color.RED;
 	public final static Color BORDER_COLOR = Color.BLACK;
 	public final static Color DATA_COLOR = Color.BLACK;
+	public final static Color PRODUCT_COLOR = Color.BLACK;
+	public final static Color PRODUCT_LABEL_COLOR = Color.BLACK;
+	public final static Color REMOVE_PRODUCT_COLOR = Color.RED;
 	
 	//dimensions
 	public final static Dimension PANEL_DIMENSION = new Dimension(400,300);

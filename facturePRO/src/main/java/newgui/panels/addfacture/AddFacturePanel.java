@@ -25,7 +25,7 @@ public class AddFacturePanel extends JFrame {
 		
 		//components
 		data = new FactureData(parent);
-		products = new FactureProducts(parent);
+		products = new FactureProducts(this);
 		
 	    // gridBagLayout
 	    GridBagLayout layout = new GridBagLayout();
@@ -56,7 +56,12 @@ public class AddFacturePanel extends JFrame {
 	
 	public static void main(String [] args) {
 		AddFacturePanel panel = new AddFacturePanel(null);
-		panel.data.setClient("weqweq");
+		//panel.data.setClient("weqweq");
+		panel.products.addProduct(newdatabase.connector.TowarConnector.getTowar(13));
+		panel.products.addProduct(newdatabase.connector.TowarConnector.getTowar(10));
+		panel.products.addProduct(newdatabase.connector.TowarConnector.getTowar(10));
+		panel.products.addProduct(newdatabase.connector.TowarConnector.getTowar(10));
+		panel.products.addProduct(newdatabase.connector.TowarConnector.getTowar(10));
 		panel.pack();
 	}
 }
