@@ -8,14 +8,17 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.ScrollPaneLayout;
 
+import newdatabase.Nabywca;
+import newdatabase.Towar;
 import newgui.Gui;
 import newgui.components.ActionButton;
 
-public class AddFacturePanel extends JFrame {
+public class AddFacturePanel extends JPanel {
 
 	//parent
 	Gui parent;
@@ -32,6 +35,11 @@ public class AddFacturePanel extends JFrame {
 	public AddFacturePanel(Gui parent) {
 		this.parent = parent;
 		
+		refresh();
+	}
+	
+	public void refresh() {
+		removeAll();
 		//components
 		data = new FactureData(parent);
 		products = new FactureProducts(this);
@@ -98,10 +106,20 @@ public class AddFacturePanel extends JFrame {
 	    add(button, gbc);
 	    
 	    
-	    setDefaultCloseOperation(EXIT_ON_CLOSE);
+	    //setDefaultCloseOperation(EXIT_ON_CLOSE);
 	    setBackground(PANEL_COLOR);
-	    pack();
-	    setVisible(true);
+	    //pack();
+	    setVisible(false);
+	}
+	
+	public void addProduct(Towar towar) {
+		products.addProduct(towar);
+		repaint();
+	}
+	
+	public void addNabywca(Nabywca nabywca) {
+		data.setClient(nabywca);
+		repaint();
 	}
 	
 	public static void main(String [] args) {
@@ -122,6 +140,6 @@ public class AddFacturePanel extends JFrame {
 		panel.products.addProduct(newdatabase.connector.TowarConnector.getTowar(10));
 		panel.products.addProduct(newdatabase.connector.TowarConnector.getTowar(10));
 		panel.products.addProduct(newdatabase.connector.TowarConnector.getTowar(10));
-		panel.pack();
+		//panel.pack();
 	}
 }

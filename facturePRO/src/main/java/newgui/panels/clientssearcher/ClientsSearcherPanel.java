@@ -29,7 +29,7 @@ public class ClientsSearcherPanel extends JPanel {
 	public void refresh() {
 		removeAll();
 		searcher = new ClientsSearcher(this);
-		list = new ClientsList();
+		list = new ClientsList(parent);
 		
 	    // gridBagLayout
 	    GridBagLayout layout = new GridBagLayout();

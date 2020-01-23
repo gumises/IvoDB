@@ -76,10 +76,8 @@ public class FactureData extends JPanel {
 		add(noClient, gbc);
 	}
 	
-	public void setClient(String nazwa) {
+	public void setClient(Nabywca nabywca) {
 		removeAll();
-		
-		Nabywca nabywca = getClient(nazwa);
 		Adres adres = nabywca.getAdres();
 		name.setText(nabywca.getNazwa());
 		phone.setText(nabywca.getTelefon());

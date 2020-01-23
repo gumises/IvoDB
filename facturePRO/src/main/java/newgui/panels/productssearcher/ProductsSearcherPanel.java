@@ -29,7 +29,7 @@ public class ProductsSearcherPanel extends JPanel {
 	public void refresh() {
 		removeAll();
 		searcher = new ProductsSearcher(this);
-		list = new ProductsList();
+		list = new ProductsList(parent);
 		
 	    // gridBagLayout
 	    GridBagLayout layout = new GridBagLayout();

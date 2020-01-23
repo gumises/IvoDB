@@ -5,6 +5,8 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JFrame;
 
+import newdatabase.Nabywca;
+import newdatabase.Towar;
 import newgui.dialogs.LoginDialog;
 import newgui.panels.AreaPanel;
 import newgui.panels.ButtonsPanel;
@@ -105,6 +107,9 @@ public class Gui extends JFrame {
 		case DYNAMIC_QUERY:
 			areaPanel.initDynamicQueryPanel();
 			break;
+		case ADD_INVOICE:
+			areaPanel.initAddFacturePanel();
+			break;
 		}
 		pack();
 	}
@@ -118,6 +123,18 @@ public class Gui extends JFrame {
 	/** Refreshes screens and lists. */
 	public void refresh(String action) {
 		actionButtonPressed(action);
+	}
+	
+	public void setTowar(Towar towar) {
+		areaPanel.addFacturePanel.addProduct(towar);
+		pack();
+		System.out.println("setting towar");
+	}
+	
+	public void setNabywca(Nabywca nabywca) {
+		areaPanel.addFacturePanel.addNabywca(nabywca);
+		pack();
+		System.out.println("setting towar");
 	}
 
 	public static void main(String[] args) {

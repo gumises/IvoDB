@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import newgui.Gui;
+import newgui.panels.addfacture.AddFacturePanel;
 import newgui.temppanels.AddProductPanel;
 import newgui.temppanels.AddClientPanel;
 import newgui.temppanels.ChangeAmountOfProduct;
@@ -26,6 +27,7 @@ public class AreaPanel extends JPanel {
 	ChangeAmountOfProduct changeAmountOfProduct;
 	AddClientPanel addPurchaserPanel;
 	DynamicQueryPanel dynamicQueryPanel;
+	public AddFacturePanel addFacturePanel;
 	
 	ArrayList<JPanel> panels;
 	
@@ -46,6 +48,8 @@ public class AreaPanel extends JPanel {
 			panels.add(addPurchaserPanel);
 		dynamicQueryPanel = new DynamicQueryPanel(parent);
 			panels.add(dynamicQueryPanel);
+		addFacturePanel = new AddFacturePanel(parent);
+			panels.add(addFacturePanel);
 			
 	    // gridBagLayout
 	    GridBagLayout layout = new GridBagLayout();
@@ -62,6 +66,7 @@ public class AreaPanel extends JPanel {
 	    add(changeAmountOfProduct);
 	    add(addPurchaserPanel);
 	    add(dynamicQueryPanel);
+	    add(addFacturePanel);
 	    
 		setVisible(true);
 		setBackground(PANEL_COLOR);
@@ -96,6 +101,13 @@ public class AreaPanel extends JPanel {
 	public void initDynamicQueryPanel() {
 		invisibleAll();
 		dynamicQueryPanel.setVisible(true);
+	}
+	
+	/** Sets add facture panel to be visible. */
+	public void initAddFacturePanel() {
+		invisibleAll();
+		addFacturePanel.refresh();
+		addFacturePanel.setVisible(true);
 	}
 	
 	

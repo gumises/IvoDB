@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 
 import newdatabase.Nabywca;
 import newdatabase.Towar;
+import newgui.Gui;
 
 import static newgui.constants.ListPanelConstants.*;
 import static newdatabase.connector.ClientConnector.*;
@@ -22,7 +23,13 @@ import java.util.Vector;
 
 public class ClientsList extends JPanel {
 
-	public ClientsList() {
+	List<Nabywca> nabywcy;
+	Gui parent;
+	String lastChoice;
+	
+	public ClientsList(Gui parent) {
+		this.parent = parent;
+		lastChoice = null;
  		refresh(null, null, null);
 	}
 	
@@ -70,7 +77,7 @@ public class ClientsList extends JPanel {
 	/** Returns filled table model. */
 	public DefaultTableModel prepareTableModel(String name, String phone, String nip) {
 		DefaultTableModel model = new DefaultTableModel(CLIENT_COLUMN_NAMES, 0);
-        List<Nabywca> nabywcy = getClients(name, phone, nip);
+        nabywcy = getClients(name, phone, nip);
         for(Nabywca nabywca: nabywcy)
         	System.out.println(nabywcy);
         System.out.println(nabywcy.size());
@@ -85,12 +92,18 @@ public class ClientsList extends JPanel {
 	
 	/** Selects specific row. */
 	public void selectRow(String value) {
+		for(Nabywca nabywca: nabywcy)
+			if(nabywca.getNazwa().contentEquals(value) && !value.equals(lastChoice)) {
+				parent.setNabywca(nabywca);
+				lastChoice = value;
+				break;
+			}
 		System.out.println(value);
 	}
 	
 	public static void main(String [] args) {
 		JFrame frame = new JFrame();
-		frame.add(new ClientsList());
+		frame.add(new ClientsList(null));
 		frame.pack();
 		frame.setVisible(true);;
 		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);

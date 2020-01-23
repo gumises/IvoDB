@@ -30,7 +30,7 @@ public class FactureProducts extends JPanel {
 	public FactureProducts(AddFacturePanel parent) {
 		this.parent = parent;
 		products = new ArrayList<SingleProduct>();
-		setBackground(Color.RED);
+		setBackground(Color.DARK_GRAY);
 		//setMaximumSize(new Dimension(100,100));
 		counter = 0;
 		
@@ -69,7 +69,7 @@ public class FactureProducts extends JPanel {
 		for(SingleProduct sigProduct : products)
 			sigProduct.setNumber(counter++);
 		setValues();
-		parent.pack();
+		//parent.pack();
 	}
 	
 	public void setValues() {

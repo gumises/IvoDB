@@ -9,6 +9,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import newdatabase.Towar;
+import newgui.Gui;
 
 import static newgui.constants.ListPanelConstants.*;
 import static newdatabase.connector.TowarConnector.*;
@@ -21,7 +22,13 @@ import java.util.Vector;
 
 public class ProductsList extends JPanel {
 
-	public ProductsList() {
+	List<Towar> towars;
+	Gui parent;
+	String lastChoice;
+	
+	public ProductsList(Gui parent) {
+		this.parent = parent;
+		lastChoice = null;
  		refresh(null, null, null, null);
 	}
 	
@@ -70,7 +77,7 @@ public class ProductsList extends JPanel {
 	public DefaultTableModel prepareTableModel(String name, Double maxPrice, Double minPrice, Integer minAmount) {
 		System.out.println("refreshing!");
 		DefaultTableModel model = new DefaultTableModel(COLUMN_NAMES, 0);
-        List<Towar> towars = getTowars(name, maxPrice, minPrice, minAmount);
+        towars = getTowars(name, maxPrice, minPrice, minAmount);
         for(Towar towar: towars)
         	System.out.println(towar);
         System.out.println(towars.size());
@@ -85,12 +92,18 @@ public class ProductsList extends JPanel {
 	
 	/** Selects specific row. */
 	public void selectRow(String value) {
+		for(Towar towar: towars)
+			if(towar.getNazwa().contentEquals(value) && !value.equals(lastChoice)) {
+				parent.setTowar(towar);
+				lastChoice = value;
+				break;
+			}
 		System.out.println(value);
 	}
 	
 	public static void main(String [] args) {
 		JFrame frame = new JFrame();
-		frame.add(new ProductsList());
+		frame.add(new ProductsList(null));
 		frame.pack();
 		frame.setVisible(true);;
 		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
