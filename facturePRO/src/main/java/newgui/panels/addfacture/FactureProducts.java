@@ -6,6 +6,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -82,5 +83,12 @@ public class FactureProducts extends JPanel {
 			values[2] += tempValues[2];
 		}
 		parent.singleSum.setValues(values);
+	}
+	
+	public List<TowarData> getTowarsData() {
+		List<TowarData> towarsData = new ArrayList<TowarData>();
+		for(SingleProduct product : products)
+			towarsData.add(product.getTowarData());
+		return towarsData;
 	}
 }

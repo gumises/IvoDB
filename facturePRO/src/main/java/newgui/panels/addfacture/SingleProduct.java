@@ -107,4 +107,8 @@ class SingleProduct extends JPanel {
 				bruttoValue.getValue()
 		};
 	}
+	
+	public TowarData getTowarData() {
+		return new TowarData(towar.getId(), (int)amount.getValue());
+	}
 }

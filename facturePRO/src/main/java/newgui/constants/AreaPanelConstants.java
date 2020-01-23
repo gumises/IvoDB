@@ -81,8 +81,8 @@ public class AreaPanelConstants {
 	public final static Dimension PANEL_DIMENSION2 = new Dimension(400,600);
 	public final static Dimension MAINPANEL_DIMENSION = new Dimension(800,800);
 	//public final static Dimension ADD_FACTURE_DATA = new Dimension(600,300);
-	public final static Dimension ADD_FACTURE_DATA = new Dimension(500,250);
-	public final static Dimension ADD_FACTURE_PRODUCTS = new Dimension(600,300);
+	public final static Dimension ADD_FACTURE_DATA = new Dimension(500,225);
+	public final static Dimension ADD_FACTURE_PRODUCTS = new Dimension(600,275);
 	public final static Dimension ADD_FACTURE_LABEL = new Dimension(300,40);
 	public final static Dimension ADD_FACTURE_BUTTON_DIMENSION = new Dimension(300,75);
 	

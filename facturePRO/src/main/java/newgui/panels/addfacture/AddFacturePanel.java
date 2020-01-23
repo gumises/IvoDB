@@ -1,6 +1,12 @@
 package newgui.panels.addfacture;
 
+import static newgui.components.FormatterFactory.getFormat;
 import static newgui.constants.AreaPanelConstants.*;
+import static newgui.constants.ButtonsPanelConstants.SEARCH_PRODUCTS;
+import static newgui.constants.DataFormats.*;
+import static newgui.constants.ListPanelConstants.FIELD_FONT;
+import static newgui.constants.ListPanelConstants.MINWAREHOUSE_TEXT;
+import static newdatabase.connector.FactureConnector.*;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -17,13 +23,16 @@ import newdatabase.Nabywca;
 import newdatabase.Towar;
 import newgui.Gui;
 import newgui.components.ActionButton;
+import newgui.components.MyTextField;
 
 public class AddFacturePanel extends JPanel {
 
 	//parent
 	Gui parent;
+	Nabywca nabywca;
 	
 	//components
+	MyTextField number;
 	FactureData data;
 	FactureProducts products;
 	ProductsLabel label;
@@ -34,13 +43,14 @@ public class AddFacturePanel extends JPanel {
 	
 	public AddFacturePanel(Gui parent) {
 		this.parent = parent;
-		
+		nabywca = null;
 		refresh();
 	}
 	
 	public void refresh() {
 		removeAll();
 		//components
+		number = new MyTextField(getFormat(TEXT), FIELD_FONT, "numer:");
 		data = new FactureData(parent);
 		products = new FactureProducts(this);
 		label = new ProductsLabel();
@@ -51,6 +61,7 @@ public class AddFacturePanel extends JPanel {
 				ADD_FACTURE_BUTTON_COLOR, 
 				ADD_FACTURE_BUTTON_FONT, 
 				ADD_FACTURE_BUTTON_DIMENSION);
+		button.addActionListener(event -> tryAddFacture());
 		
 	    // gridBagLayout
 	    GridBagLayout layout = new GridBagLayout();
@@ -64,14 +75,19 @@ public class AddFacturePanel extends JPanel {
 	    gbc.fill = GridBagConstraints.BOTH;
 	    gbc.anchor = GridBagConstraints.NORTH;
 	    
-	    // data
+	    // number
 	    gbc.gridx = 0;
 	    gbc.gridy = 0;
+	    add(number, gbc);
+	    
+	    // data
+	    gbc.gridx = 0;
+	    gbc.gridy = 1;
 	    add(data, gbc);
 	    
 	    // label
 	    gbc.gridx = 0;
-	    gbc.gridy = 1;
+	    gbc.gridy = 2;
 	    add(label, gbc);
 	    
 	    // products
@@ -83,24 +99,24 @@ public class AddFacturePanel extends JPanel {
 	    pane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 	    gbc.anchor = GridBagConstraints.NORTH;
 	    gbc.gridx = 0;
-	    gbc.gridy = 2;
+	    gbc.gridy = 3;
 	    add(pane, gbc);
 	    
 	    // sum label
 	    gbc.gridx = 0;
-	    gbc.gridy = 3;
+	    gbc.gridy = 4;
 	    gbc.insets = new Insets(3,3,0,3);
 	    add(sumLabel, gbc);
 	    
 	    // single sum
 	    gbc.gridx = 0;
-	    gbc.gridy = 4;
+	    gbc.gridy = 5;
 	    gbc.insets = new Insets(0,3,3,3);
 	    add(singleSum, gbc);
 	    
 	    // button
 	    gbc.gridx = 0;
-	    gbc.gridy = 5;
+	    gbc.gridy = 6;
 	    gbc.fill = GridBagConstraints.VERTICAL;
 	    gbc.insets = new Insets(3,3,3,3);
 	    add(button, gbc);
@@ -119,7 +135,17 @@ public class AddFacturePanel extends JPanel {
 	
 	public void addNabywca(Nabywca nabywca) {
 		data.setClient(nabywca);
+		this.nabywca = nabywca;
 		repaint();
+	}
+	
+	public void tryAddFacture() {
+		try {
+			insertFacture(nabywca, (String)number.getValue(), products.getTowarsData());
+		}
+		catch(Exception exception) {
+			System.out.println("Something went wrong!");
+		}
 	}
 	
 	public static void main(String [] args) {
@@ -142,4 +168,5 @@ public class AddFacturePanel extends JPanel {
 		panel.products.addProduct(newdatabase.connector.TowarConnector.getTowar(10));
 		//panel.pack();
 	}
+	
 }
