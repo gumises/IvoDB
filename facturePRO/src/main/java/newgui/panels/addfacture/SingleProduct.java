@@ -1,25 +1,18 @@
 package newgui.panels.addfacture;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Insets;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-
-import javax.swing.JPanel;
-
 import newdatabase.Towar;
 import newgui.components.ActionButton;
 import newgui.components.MyLabel;
 import newgui.components.MyTextField;
-import newgui.panels.addfacture.TempProducts.NameField;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 import static newgui.components.FormatterFactory.getFormat;
 import static newgui.constants.AreaPanelConstants.*;
-import static newgui.constants.ButtonsPanelConstants.SEARCH_PRODUCTS;
-import static newgui.constants.DataFormats.*;
+import static newgui.constants.DataFormats.INTEGER;
 
 /** Single product in facture. */
 class SingleProduct extends JPanel {

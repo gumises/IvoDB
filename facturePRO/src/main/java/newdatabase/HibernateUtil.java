@@ -47,5 +47,9 @@ import org.hibernate.service.ServiceRegistryBuilder;
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
-}
+
+     public static Configuration getConfiguration() {
+         return configuration;
+     }
+ }
 
