@@ -1,24 +1,18 @@
 package newgui.panels.clientssearcher;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import newdatabase.Nabywca;
+import newgui.Gui;
+
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-
-import newdatabase.Nabywca;
-import newdatabase.Towar;
-import newgui.Gui;
-
-import static newgui.constants.ListPanelConstants.*;
-import static newdatabase.connector.ClientConnector.*;
-
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
+
+import static newdatabase.connector.ClientConnector.getClients;
+import static newgui.constants.ListPanelConstants.*;
 
 
 public class ClientsList extends JPanel {
@@ -77,7 +71,15 @@ public class ClientsList extends JPanel {
 	/** Returns filled table model. */
 	public DefaultTableModel prepareTableModel(String name, String phone, String nip) {
 		DefaultTableModel model = new DefaultTableModel(CLIENT_COLUMN_NAMES, 0);
-        nabywcy = getClients(name, phone, nip);
+		nabywcy = new ArrayList<>();
+
+		try {
+			nabywcy = getClients(name, phone, nip);
+		}
+		catch (Exception e)
+		{
+			System.out.println("Access denied");
+		}
         for(Nabywca nabywca: nabywcy)
         	System.out.println(nabywcy);
         System.out.println(nabywcy.size());

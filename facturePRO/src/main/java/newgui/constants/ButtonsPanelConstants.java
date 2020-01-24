@@ -20,7 +20,7 @@ public class ButtonsPanelConstants {
 	public final static String ADD_CLIENT = "Dodaj nabywce";
 
 	//texts other
-	public final static String MAKE_BAKCUP = "Wykonaj backup";
+	public final static String MAKE_BACKUP = "Wykonaj backup";
 	public final static String LOAD_BACKUP = "Wczytaj backup";
 	public final static String DYNAMIC_QUERY = "Zapytanie dynamiczne";
 	public final static String LOG_IN = "Zaloguj";

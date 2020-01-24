@@ -27,7 +27,7 @@ public class BackupConnector {
         }
     }
 
-    static void makeBackup() throws URISyntaxException, IOException, InterruptedException {
+    public static void makeBackup() throws URISyntaxException, IOException, InterruptedException {
         CodeSource codeSource = BackupConnector.class.getProtectionDomain().getCodeSource();
         File jarFile = new File(codeSource.getLocation().toURI().getPath());
         String jarDir = jarFile.getParentFile().getPath();
@@ -65,7 +65,7 @@ public class BackupConnector {
         }
     }
 
-    static void loadBackup() throws URISyntaxException, IOException, InterruptedException {
+    public static void loadBackup() throws URISyntaxException, IOException, InterruptedException {
 
         CodeSource codeSource = BackupConnector.class.getProtectionDomain().getCodeSource();
         File jarFile = new File(codeSource.getLocation().toURI().getPath());

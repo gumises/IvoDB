@@ -7,6 +7,19 @@ CREATE USER 'new'@'localhost' IDENTIFIED BY 'pass';
 GRANT ALL PRIVILEGES ON *.* to 'new'@'localhost';
 CREATE USER 'neww'@'localhost' IDENTIFIED BY '111';
 GRANT ALL PRIVILEGES ON *.* to 'neww'@'localhost';
+CREATE USER 'guest'@'localhost' IDENTIFIED BY '111';
+GRANT SELECT ON ivodb.towar to 'guest'@'localhost';
+GRANT SELECT ON ivodb.magazyn to 'guest'@'localhost';
+GRANT SELECT ON ivodb.vat to 'guest'@'localhost';
+CREATE USER 'emploee'@'localhost' IDENTIFIED BY '111';
+GRANT SELECT,INSERT ON ivodb.towar to 'emploee'@'localhost';
+GRANT SELECT,INSERT,UPDATE,DELETE ON ivodb.magazyn to 'emploee'@'localhost';
+GRANT SELECT ON ivodb.vat to 'emploee'@'localhost';
+GRANT SELECT,INSERT ON ivodb.nabywca to 'emploee'@'localhost';
+GRANT SELECT,INSERT ON ivodb.adres to 'emploee'@'localhost';
+GRANT SELECT,INSERT ON ivodb.faktura to 'emploee'@'localhost';
+GRANT SELECT,INSERT ON ivodb.kategoria to 'emploee'@'localhost';
+
 CREATE TABLE `vat` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`nazwa` VARCHAR(20) NOT NULL,

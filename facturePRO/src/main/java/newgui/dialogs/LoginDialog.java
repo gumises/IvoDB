@@ -1,20 +1,17 @@
 package newgui.dialogs;
 
-import javax.swing.JDialog;
-
 import newdatabase.HibernateUtil;
+import newgui.Gui;
 import newgui.components.ActionButton;
 import newgui.components.MyLabel;
 import newgui.components.MyTextField;
 
-import static newgui.constants.ButtonsPanelConstants.SEARCH_PRODUCTS;
-import static newgui.constants.LoginDialogConstants.*;
-import static newgui.constants.DataFormats.*;
-import static newgui.components.FormatterFactory.getFormat;
+import javax.swing.*;
+import java.awt.*;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import static newgui.components.FormatterFactory.getFormat;
+import static newgui.constants.DataFormats.INTEGER;
+import static newgui.constants.LoginDialogConstants.*;
 
 public class LoginDialog extends JDialog {
 
@@ -33,9 +30,9 @@ public class LoginDialog extends JDialog {
 	// values
 	String password;
 	String login;
-	
-	public LoginDialog() {
-		
+	Gui gui;
+	public LoginDialog(Gui gui) {
+		this.gui =gui;
 		// labels
 		loginLabel = new MyLabel(LOGIN_TEXT, LABEL_FONT, LABEL_DIMENSION, LABEL_TEXT_COLOR);
 		passwordLabel = new MyLabel(PASSWORD_TEXT, LABEL_FONT, LABEL_DIMENSION, LABEL_TEXT_COLOR);
@@ -111,7 +108,7 @@ public class LoginDialog extends JDialog {
 		login = loginField.getText();
 		password = passwordField.getText();
 		try {
-			HibernateUtil.createNewSession(password, login);
+			gui.changeAccess(HibernateUtil.createNewSession(password, login));
 			HibernateUtil.getSessionFactory().openSession().beginTransaction();
 		}
 		catch(Exception e)
@@ -124,7 +121,7 @@ public class LoginDialog extends JDialog {
 
 	
 	public static void main(String[] args) {
-		new LoginDialog();
+
 	}
 
 }

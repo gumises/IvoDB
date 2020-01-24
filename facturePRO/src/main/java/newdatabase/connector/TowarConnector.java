@@ -1,15 +1,14 @@
 package newdatabase.connector;
 
-import java.util.List;
-
+import newdatabase.HibernateUtil;
+import newdatabase.Magazyn;
+import newdatabase.Towar;
+import newdatabase.Vat;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import newdatabase.HibernateUtil;
-import newdatabase.Towar;
-import newdatabase.Vat;
-import newdatabase.Magazyn;
+import java.util.List;
 
 public class TowarConnector {
 
@@ -117,7 +116,9 @@ public class TowarConnector {
 	        
 			try {
 				Towar towar = new Towar(vat, nazwa, cena);
+				Magazyn magazyn = new Magazyn(towar,0);
 				session.save(towar);
+				session.save(magazyn);
 				transaction.commit();
 			}
 			catch(Exception exception) {
