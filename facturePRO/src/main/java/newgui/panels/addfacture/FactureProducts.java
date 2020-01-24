@@ -1,19 +1,11 @@
 package newgui.panels.addfacture;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
+import newdatabase.Towar;
+
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.JPanel;
-
-import newdatabase.Towar;
-import newgui.Gui;
-
-import static newgui.constants.AreaPanelConstants.*;
 
 public class FactureProducts extends JPanel {
 
@@ -91,4 +83,14 @@ public class FactureProducts extends JPanel {
 			towarsData.add(product.getTowarData());
 		return towarsData;
 	}
+
+    public void addProduct(Towar towar, int ilosc) {
+		temp = new SingleProduct(towar, this,ilosc);
+		con.gridy = counter;
+		temp.setNumber(counter+1);
+		products.add(temp);
+		add(temp, con);
+		counter++;
+		setValues();
+    }
 }

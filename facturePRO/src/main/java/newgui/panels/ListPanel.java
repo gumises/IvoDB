@@ -1,16 +1,15 @@
 package newgui.panels;
 
-import javax.swing.JPanel;
-
 import newgui.Gui;
 import newgui.panels.clientssearcher.ClientsSearcherPanel;
-import newgui.panels.productssearcher.ProductsList;
+import newgui.panels.fakturaSercher.FakturaSearcherPanel;
 import newgui.panels.productssearcher.ProductsSearcherPanel;
 
-import static newgui.constants.ListPanelConstants.*;
+import javax.swing.*;
+import java.awt.*;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import static newgui.constants.ListPanelConstants.PANEL_COLOR;
+import static newgui.constants.ListPanelConstants.PANEL_DIMENSION;
 
 public class ListPanel extends JPanel {
 
@@ -20,6 +19,7 @@ public class ListPanel extends JPanel {
 	//temporary panels
 	ProductsSearcherPanel productsSearcherPanel;
 	ClientsSearcherPanel clientsSearcherPanel;
+	FakturaSearcherPanel fakturaSearcherPanel;
 	GridBagConstraints gbc;
 	
 	
@@ -30,6 +30,7 @@ public class ListPanel extends JPanel {
 		//temporary panels
 		productsSearcherPanel = new ProductsSearcherPanel(parent);
 		clientsSearcherPanel = new ClientsSearcherPanel(parent);
+		fakturaSearcherPanel = new FakturaSearcherPanel(parent);
 		
 	    // gridBagLayout
 	    GridBagLayout layout = new GridBagLayout();
@@ -58,6 +59,12 @@ public class ListPanel extends JPanel {
 		removeAll();
 		clientsSearcherPanel.refresh();
 		add(clientsSearcherPanel, gbc);
+	}
+	public void initFakturaSearcherPanel() {
+		removeAll();
+
+		fakturaSearcherPanel.refresh();
+		add(fakturaSearcherPanel, gbc);
 	}
 	
 	/** Refreshes screens and lists. */

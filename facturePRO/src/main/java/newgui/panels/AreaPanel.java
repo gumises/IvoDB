@@ -1,20 +1,16 @@
 package newgui.panels;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.util.ArrayList;
-
-import javax.swing.JPanel;
-
+import newdatabase.Faktura;
 import newgui.Gui;
 import newgui.panels.addfacture.AddFacturePanel;
-import newgui.temppanels.AddProductPanel;
-import newgui.temppanels.AddClientPanel;
-import newgui.temppanels.ChangeAmountOfProduct;
-import newgui.temppanels.DynamicQueryPanel;
-import newgui.temppanels.RemoveProductPanel;
+import newgui.temppanels.*;
 
-import static newgui.constants.AreaPanelConstants.*;
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
+
+import static newgui.constants.AreaPanelConstants.MAINPANEL_DIMENSION;
+import static newgui.constants.AreaPanelConstants.PANEL_COLOR;
 
 public class AreaPanel extends JPanel {
 
@@ -116,4 +112,14 @@ public class AreaPanel extends JPanel {
 		for(JPanel panel: panels)
 			panel.setVisible(false);
 	}
+
+	public void initAddFacturePanel(Faktura faktura) {
+		invisibleAll();
+		addFacturePanel.display(faktura);
+		addFacturePanel.setVisible(true);
+		parent.setNabywca(faktura.getNabywca());
+		parent.setTowar(faktura.getKategorias());
+	}
+
+
 }

@@ -1,8 +1,6 @@
 package newgui;
 
-import newdatabase.HibernateUtil;
-import newdatabase.Nabywca;
-import newdatabase.Towar;
+import newdatabase.*;
 import newdatabase.connector.BackupConnector;
 import newgui.dialogs.LoginDialog;
 import newgui.panels.AreaPanel;
@@ -13,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Set;
 
 import static newgui.constants.AccessLevels.VISITOR;
 import static newgui.constants.ButtonsPanelConstants.*;
@@ -26,7 +25,7 @@ public class Gui extends JFrame {
 
     //dialogs
     LoginDialog loginDialog;
-    private int access;
+    private int access =2;
 
     public Gui() {
 
@@ -89,6 +88,9 @@ public class Gui extends JFrame {
      */
     public void actionButtonPressed(String action) {
         switch (action) {
+            case SEARCH_INVOICES:
+                listPanel.initFakturaSearcherPanel();
+                break;
             case SEARCH_PRODUCTS:
                 listPanel.initProductsSearcherPanel();
                 break;
@@ -181,5 +183,17 @@ public class Gui extends JFrame {
     public static void main(String[] args) {
         //TODO delete main method
         new Gui();
+    }
+
+    public void setFaktura(Faktura faktura) {
+        areaPanel.initAddFacturePanel(faktura);
+    }
+
+    public void setTowar(Set<Kategoria> kategorias) {
+        for(Kategoria kategoria : kategorias) {
+            areaPanel.addFacturePanel.addProduct(kategoria);
+            pack();
+            System.out.println("setting towar");
+        }
     }
 }

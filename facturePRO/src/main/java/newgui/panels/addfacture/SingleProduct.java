@@ -32,6 +32,10 @@ class SingleProduct extends JPanel {
 	FactureProducts parent;
 	
 	public SingleProduct(Towar towar, FactureProducts parent) {
+		this( towar,  parent, 0);
+	}
+
+	public SingleProduct(Towar towar, FactureProducts factureProducts, int ilosc) {
 		super();
 		this.parent = parent;
 		this.towar = towar;
@@ -46,7 +50,7 @@ class SingleProduct extends JPanel {
 
 		remove = new ActionButton("-", REMOVE_PRODUCT_COLOR, REMOVE_PRODUCT_FONT);
 		remove.addActionListener(event -> parent.removeProducs(this));
-		
+
 		setLayout(new GridLayout(1,0));
 
 		add(number);
@@ -59,20 +63,21 @@ class SingleProduct extends JPanel {
 		add(bruttoValue);
 		add(remove);
 		setVisible(true);
-		
+
 		amount.addFocusListener(new FocusAdapter() {
 
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				if(amount.getMyValue() == null)
-					amount.setValue(0);
+					amount.setValue(ilosc);
 				setValues();
 			}
 		});
-		
+
 		setPreferredSize(ADD_FACTURE_LABEL);
+
 	}
-	
+
 	public void setNumber(int newNumber) {
 		number.setText(Integer.toString(newNumber));
 	}

@@ -9,6 +9,7 @@ public class ListPanelConstants {
 	// TABLE
 	public final static String[] COLUMN_NAMES = {"nazwa", "cena", "vat", "ilosc"};
 	public final static String[] CLIENT_COLUMN_NAMES = {"nazwa", "telefon", "nip"};
+	public final static String[] FAKTURA_COLUMN_NAMES = {"numer", "data_wystawienia", "klient"};
 	
 	// public final static Dimension TABLE_DIMENSION = new Dimension(400,600);
 	public final static Dimension HEADER_DIMENSION = new Dimension(400,40);
